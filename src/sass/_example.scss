@@ -1,28 +1,146 @@
-.example {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  line-height: 1.5;
-  background-color: #fff;
-  color: #2f2f37;
-  max-width: 960px;
-  padding: 16px;
-}
-
-.example code {
-  font-family: monospace;
-  font-size: 16px;
-  font-weight: 700;
-  background-color: #ff6b0a;
-  color: #fff;
-  padding: 2px 6px;
-  border-radius: 2px;
-}
-
-.example .background {
-  height: 240px;
-  // ❗️❗️❗️ The path to images from a SASS file
-  // is always the same as from the css folder.
-  background-image: url('../images/logo.png');
-  background-size: cover;
+.header {
+  background-image: url(../images/Header-mobile1x.jpg);
+  background-repeat: no-repeat;
   background-position: center;
+  background-size: cover;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1280px;
+  padding-top: 40px;
+  padding-bottom: 92px;
+
+  @media (min-device-pixel-ratio: 2),
+  (min-resolution: 192dpi),
+  (min-resolution: 2dppx) {
+    background-image: url(../images/Header-mobile2x.jpg);
+  }
+
+  @media screen and (min-width: 768px) {
+    background-image: url(../images/Header-tabl1x.jpg);
+    padding-bottom: 80px;
+    padding-top: 45px;
+
+    @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+      background-image: url(../images/Header-tabl2x.jpg);
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    background-image: url(../images/Header-desk1x.jpg);
+    max-width: 1280px;
+
+    @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+      background-image: url(../images/Header-desk2x.jpg);
+    }
+  }
+}
+
+.header-logo {
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.16;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.header-link {
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.16;
+  color: #ffffff;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 54px;
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 47px;
+  }
+}
+
+.right-side {
+  display: flex;
+}
+
+.header-item:not(:last-child) {
+  margin-right: 39px;
+}
+
+.header-input {
+  background-color: inherit;
+  width: 394px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 0.5px solid #ffffff;
+}
+
+.input-icon {
+  position: absolute;
+  left: 265px;
+  top: 4px;
+
+  @media screen and (min-width: 768px) {
+    left: 535px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    left: 795px;
+  }
+}
+
+.span-header {
+  display: none;
+
+  @media screen and (min-width: 768px) {
+    display: inline;
+  }
+
+
+}
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding-right: 20px;
+  padding-left: 20px;
+
+  @media screen and (min-width: 320px) {
+    width: 320px;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 768px;
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    width: 1280px;
+  }
+}
+
+.header-form {
+  display: flex;
+  position: relative;
+  justify-content: center;
+}
+
+::placeholder {
+  color: #ffffff;
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 14px;
+  line-height: calc(16 / 14);
 }
