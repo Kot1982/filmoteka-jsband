@@ -2,9 +2,11 @@ import NewsApiServise from './api-service';
 
 const newsApiServise = new NewsApiServise();
 const movies = document.querySelector('.movies-home');
+const spinner = document.querySelector('.sk-circle');
 let genre;
 
 function renderTrendMovies() {
+  spinner.classList.remove('visually-hidden');
   newsApiServise.getTrendMovies().then(response => {
     console.log(response.results);
 
@@ -21,6 +23,7 @@ function renderTrendMovies() {
       })
       .join('');
     movies.innerHTML = markup;
+    spinner.classList.add('visually-hidden');
   });
 }
 renderTrendMovies();
