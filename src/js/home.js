@@ -3,6 +3,7 @@ const newsApiServise = new NewsApiServise();
 // const key = '125725f49ad2ae69609a1a5a9c4211d9';
 // const url = `https://api.themoviedb.org/3/`;
 const movies = document.querySelector('.movies-home');
+const spinner  = document.querySelector(".sk-circle");
 let genre;
 
 // function fetchPosts() {
@@ -14,6 +15,7 @@ let genre;
 // fetchPosts();
 
 function fgfh() {
+  spinner.classList.remove('visually-hidden');
   newsApiServise.getTrendMovies().then(response => {
     console.log(response.results);
 
@@ -33,6 +35,7 @@ function fgfh() {
       })
       .join('');
     movies.innerHTML = markup;
+    spinner.classList.add('visually-hidden');
   });
 }
 fgfh();
@@ -43,4 +46,7 @@ function getGenre() {
   })
 }
 
- getGenre()
+getGenre()
+
+
+  

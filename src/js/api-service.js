@@ -1,6 +1,7 @@
 import Axios from 'axios';
 const key = '125725f49ad2ae69609a1a5a9c4211d9';
 const url = `https://api.themoviedb.org/3/`;
+
 export default class NewsApiServise {
   constructor() {
     this.searchQuery = '';
