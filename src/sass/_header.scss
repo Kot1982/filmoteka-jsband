@@ -204,6 +204,7 @@
     border-radius: 5px;
     background-color: inherit;
     color: #FFFFFF;
+    cursor: pointer;
 }
 
 .header-buttons{
@@ -214,7 +215,7 @@
 .header-button:not(:last-child) {
     margin-right: 20px;
 }
-.btn:active {
+.active-btn {
 background-color: #FF6B01;
 border-color: #FF6B01;
 
