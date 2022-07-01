@@ -1,0 +1,52 @@
+
+<div class="backdrop is-hidden">
+  <div class="modal">
+    <button type='button' class='modal-close-btn close'>X
+    </button>
+  
+  <div class="modal-conteiner" data-movieId="id">
+        <div class='modal-conteiner-content'>
+          <img
+            class='modal-conteiner-img'
+            src='#'
+            alt='title'
+            loading='lazy'
+          />
+        </div>
+        <div class='card-container'>
+          <h2 class='card-title'>title</h2>
+          <ul class='card-list'>
+            <li class='card-item'>
+              Vote / Votes
+              <p class='card-item-vote'>
+                <span class='card-item-average'>vote_average</span>/
+                <span class='card-item-count'>vote_count</span>
+              </p>
+            </li>
+            <li class='card-item'>
+              Popularity
+              <span class='card-item-popularity'>popularity</span>
+            </li>
+            <li class='card-item'>
+              Original Title
+              <span class='card-item-original-title'>original_title</span>
+            </li>
+            <li class='card-item'>
+              Genre
+              <p class='card-item-genres'>#each genres
+                  <span class='card-item-genre'>this.name</span>
+              </p>
+            </li>
+          </ul>
+          <p class='card-description'>About</p>
+          <p class='card-text'>overview</p>
+          <div class='card-ist-btn'>
+            <button type='button' class='card-btn-watched'>add to <br /> Watched</button>
+            <button type='button' class='card-btn-que'>add to queue</button>
+          </div>
+        </div>
+      </div>
+      <button type='button' class='modal-close-btn close'>
+      </button>
+    </div>
+</div>
