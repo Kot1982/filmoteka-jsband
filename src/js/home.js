@@ -34,4 +34,19 @@ function getGenre() {
   })
 }
 
- getGenre()
+getGenre()
+
+
+ const refs = {
+    openModalBtn: document.querySelector('.footer-link'),
+    closeModalBtn: document.querySelector('.close__modal'),
+    modal: document.querySelector('[data-modal]'),
+  };
+ 
+  refs.openModalBtn.addEventListener('click', toggleModal);
+  refs.closeModalBtn.addEventListener('click', toggleModal);
+
+function toggleModal(e) {
+    e.preventDefault();
+    refs.modal.classList.toggle('is-hidden');
+  }
