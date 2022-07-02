@@ -2,36 +2,32 @@ import NewsApiServise from './/api-service';
 
 const newsApiServise = new NewsApiServise();
 
-
-
 const moviesContainer = document.querySelector('.movies-home');
-const modalContainer = document.querySelector( '.modal-conteiner');
+const modalContainer = document.querySelector('.modal-conteiner');
 console.log(moviesContainer);
 const backdrop = document.querySelector('.backdrop');
-const closeBtn = document.querySelector('.modal-close-btn');
-console.log(closeBtn)
+const closeBtn = document.querySelector('.modal-close-btn.close');
+console.log(closeBtn);
 
 moviesContainer.addEventListener('click', onMovieClick);
- closeBtn.addEventListener('click', onCloseModal);
-
+closeBtn.addEventListener('click', onCloseModal);
 
 async function onMovieClick(event) {
   // event.preventDefault()
   const movieCard = event.target.closest('.movie-card');
   const movieId = movieCard.dataset.movieid;
   console.log(movieId);
- const response = await newsApiServise.getMovieInfo(movieId);
- console.log(response);
-modalContainer.innerHTML = renderMovie(response);
-openModal()
+  const response = await newsApiServise.getMovieInfo(movieId);
+  console.log(response);
+  modalContainer.innerHTML = renderMovie(response);
+  openModal();
 }
 
-
-
-function renderMovie (response){
-
-  const markup = `<div class="modal-conteiner" data-movieId="${response.id}">
-  <div class='modal-conteiner-content'> <img class="modal-conteiner-img" src="https://image.tmdb.org/t/p/w500${response.poster_path}" alt="card">
+function renderMovie(response) {
+  const markup = `
+  <div class='modal-conteiner-content'> <img class="modal-conteiner-img" src="https://image.tmdb.org/t/p/w500${
+    response.poster_path
+  }" alt="card">
   </div>
   <div class='card-container'>
           <h2 class='card-title'>${response.original_title}</h2>
@@ -49,11 +45,15 @@ function renderMovie (response){
             </li>
             <li class='card-item'>
               Original Title
-              <span class='card-item-original-title'>${response.original_title}</span>
+              <span class='card-item-original-title'>${
+                response.original_title
+              }</span>
             </li>
             <li class='card-item'>
               Genre
-              <p class='card-item-genres'>${response.genres.map(genre => genre.name).join(',')}
+              <p class='card-item-genres'>${response.genres
+                .map(genre => genre.name)
+                .join(',')}
                   <span class='card-item-genre'></span>
               </p>
             </li>
@@ -66,30 +66,19 @@ function renderMovie (response){
           </div>
         </div>
       </div>
-  </div>
-  `
+  `;
   return markup;
 }
 
 function openModal() {
-   modalContainer.classList.add('is-open');
+  //  modalContainer.classList.add('is-open');
   backdrop.classList.add('is-open');
-  backdrop.classList.remove('is-hidden')
+  backdrop.classList.remove('is-hidden');
   // document.overflow = 'hidden';
-
 }
 
-
-// function onCloseModal(){
-//   modalContainer.classList.remove('is-open');
-//   backdrop.classList.remove('is-open');
-//   backdrop.classList.add('is-hidden')
-// //   document.overflow = undefined;
-//  }
-
-function onCloseModal(){
-  modalContainer.classList.remove('is-open');
- backdrop.classList.remove('is-open');
+function onCloseModal() {
+  // modalContainer.classList.remove('is-open');
+  backdrop.classList.remove('is-open');
   backdrop.classList.add('is-hidden');
 }
-

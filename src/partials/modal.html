@@ -1,9 +1,11 @@
 
 <div class="backdrop is-hidden">
   <div class="modal">
-    <button type='button' class='modal-close-btn close'>X
+    <button type='button' class='modal-close-btn close'>
+      <svg class="button-vector" width="11" height="11">
+        <use href="/src/images/symbol-defs.svg#icon-Vector-1"></use>
+      </svg>
     </button>
-  
   <div class="modal-conteiner" data-movieId="id">
         <div class='modal-conteiner-content'>
           <img
@@ -33,20 +35,18 @@
             </li>
             <li class='card-item'>
               Genre
-              <p class='card-item-genres'>#each genres
-                  <span class='card-item-genre'>this.name</span>
+              <p class='card-item-genres'> genres
+                  <span class='card-item-genre'></span>
               </p>
             </li>
           </ul>
           <p class='card-description'>About</p>
           <p class='card-text'>overview</p>
           <div class='card-ist-btn'>
-            <button type='button' class='card-btn-watched'>add to <br /> Watched</button>
-            <button type='button' class='card-btn-que'>add to queue</button>
+            <button type='button' class='card-btn-watched'>ADD TO WATCHED</button>
+            <button type='button' class='card-btn-que'>ADD TO</button>
           </div>
         </div>
       </div>
-      <button type='button' class='modal-close-btn close'>
-      </button>
     </div>
 </div>
