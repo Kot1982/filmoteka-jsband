@@ -25,10 +25,9 @@ async function onMovieClick(event) {
 
 function renderMovie(response) {
   const markup = `
-  <div class='modal-conteiner-content'> <img class="modal-conteiner-img" src="https://image.tmdb.org/t/p/w500${
+   <img class="modal-conteiner-img" src="https://image.tmdb.org/t/p/w500${
     response.poster_path
   }" alt="card">
-  </div>
   <div class='card-container'>
           <h2 class='card-title'>${response.original_title}</h2>
           <ul class='card-list'>
