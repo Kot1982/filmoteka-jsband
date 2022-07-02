@@ -5,7 +5,7 @@ const newsApiServise = new NewsApiServise();
 const moviesContainer = document.querySelector('.movies-home');
 const modalContainer = document.querySelector('.modal-conteiner');
 console.log(moviesContainer);
-const backdrop = document.querySelector('.backdrop');
+const backdrop = document.querySelector('.backdrop-movie');
 const closeBtn = document.querySelector('.modal-close-btn.close');
 console.log(closeBtn);
 
