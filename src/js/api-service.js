@@ -17,6 +17,15 @@ export default class NewsApiServise {
       return response.data;
     });
   }
+
+  getGenres() {
+    return Axios.get(
+      `${url}genre/movie/list?api_key=${key}&language=en-US`,
+    ).then(response => {
+      return response.data.genres
+    });
+  }
+
   async getSearchMovie() {
     return await Axios.get(
       `${url}search/movie?api_key=${key}&query=${this.searchQuery}&page=${this.page}&include_adult=false`
@@ -33,15 +42,17 @@ export default class NewsApiServise {
       return response.data;
     });
   }
-  async getAllGenres() {
-    return await Axios.get(
-      `${url}genre/movie/list?api_key=${key}&language=en-US`
-    ).then(response => {
-      console.log(response.data);
-      this.allGenres.push(...response.data.genres);
-      console.log(this.allGenres);
-    });
-  }
+  // async getAllGenres() {
+  //   return await Axios.get(
+  //     `${url}genre/movie/list?api_key=${key}&language=en-US`
+  //   ).then(response => {
+  //     console.log(response.data);
+  //     this.allGenres.push(...response.data.genres);
+  //     console.log(this.allGenres);
+  //   });
+  // }
+ 
+
   incrementPage() {
     this.page += 1;
   }
