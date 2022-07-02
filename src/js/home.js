@@ -24,8 +24,11 @@ const totalResult = response.total_results;
           });
           this.page = this.page + 1;
     const markup = response.results
-      .map(({ poster_path, original_title, release_date, genre_ids, vote_average }) => {
-        return `<div class="movie-card">
+      .map(({ poster_path, original_title, release_date, genre_ids, vote_average, id }) => {
+        // console.log(poster_path)
+        //onSaveGenres(`${genre_ids}`)
+        // genres(`${genre_ids}`)
+        return `<div class="movie-card" data-movieId=${id}>
                  <img class="movie-img" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="card">
             
                  <div class="movie-info">
