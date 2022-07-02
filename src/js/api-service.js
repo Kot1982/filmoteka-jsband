@@ -42,6 +42,16 @@ export default class NewsApiServise {
       console.log(this.allGenres);
     });
   }
+
+    getGenres() {
+    return Axios.get(
+      `${url}genre/movie/list?api_key=${key}&language=en-US`,
+    ).then(response => {
+      return response.data.genres
+    });
+  }
+
+  
   incrementPage() {
     this.page += 1;
   }
