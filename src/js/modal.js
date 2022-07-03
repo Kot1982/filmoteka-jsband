@@ -77,7 +77,9 @@ function openModal() {
 }
 
 function onCloseModal() {
+ 
   // modalContainer.classList.remove('is-open');
   backdrop.classList.remove('is-open');
   backdrop.classList.add('is-hidden');
+
 }
