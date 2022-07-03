@@ -13,7 +13,7 @@ export default class NewsApiServise {
 //     &page=${this.page}`
     ).then(response => {
       //this.incrementPage();
-      console.log(response.data);
+      //console.log(response.data);
       return response.data;
     });
   }
@@ -38,7 +38,7 @@ export default class NewsApiServise {
     return await Axios.get(
       `${url}movie/${currentMovieId}?api_key=${key}&query=${this.searchQuery}&page=${this.page}&include_adult=false`
     ).then(response => {
-      console.log(response.data);
+      //console.log(response.data);
       return response.data;
     });
   }
