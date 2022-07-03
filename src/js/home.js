@@ -14,10 +14,10 @@ GenreWriteLocalStorage()
 function renderTrendMovies(currentPage) {
   spinner.classList.remove('visually-hidden');
   newsApiServise.getTrendMovies(currentPage).then(response => {
-    console.log(response.results);
+    //console.log(response.results);
 const totalResult = response.total_results;
     currentPage = response.page;
-    console.log(response.page);
+    //console.log(response.page);
     
     const instance = handlerPagination();
           instance.setItemsPerPage(20);
@@ -54,7 +54,7 @@ renderTrendMovies(currentPage);
 
 function GenreWriteLocalStorage() {
    newsApiServise.getGenres().then(res => {
-      console.log(res)
+      //console.log(res)
       res.forEach(genre => {
         //console.log(genre)
         localStorage.setItem(genre.id, genre.name)
@@ -71,7 +71,7 @@ function getGenreName(genre_ids) {
     genre.push(localStorage.getItem(id));
    
     
-    console.log(genre)
+    //console.log(genre)
   })
    if (genre.length === 2) {
       genre.slice(0, 2)
