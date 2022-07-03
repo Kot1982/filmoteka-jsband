@@ -1,11 +1,15 @@
 import NewsApiServise from './api-service';
 import handlerPagination from './pagination';
+import toggleModal from './modal-team';
+
 const newsApiServise = new NewsApiServise();
 const movies = document.querySelector('.movies-home');
 const spinner = document.querySelector('.sk-circle');
 let genre;
 let currentPage = 1;
 GenreWriteLocalStorage()
+
+
 
 function renderTrendMovies(currentPage) {
   spinner.classList.remove('visually-hidden');
@@ -77,19 +81,7 @@ function getGenreName(genre_ids) {
        
    }
 
- const refs = {
-    openModalBtn: document.querySelector('.footer-link'),
-    closeModalBtn: document.querySelector('.close__modal'),
-    modal: document.querySelector('[data-modal]'),
-  };
- 
-  refs.openModalBtn.addEventListener('click', toggleModal);
-  refs.closeModalBtn.addEventListener('click', toggleModal);
 
-function toggleModal(e) {
-    e.preventDefault();
-    refs.modal.classList.toggle('is-hidden');
-}
   
 // function newPage(currentPage) {
 //   newsApiServise.getTrendMovies(currentPage).then(response => {
