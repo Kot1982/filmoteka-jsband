@@ -13,7 +13,11 @@ export default class NewsApiServise {
 //     &page=${this.page}`
     ).then(response => {
       //this.incrementPage();
-      //console.log(response.data);
+
+      window.scrollTo(0,0)
+      console.log(response.data);
+
+
       return response.data;
     });
   }
