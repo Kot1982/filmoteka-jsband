@@ -51,9 +51,8 @@ function renderMovie(response) {
             <li class='card-item'>
               Genre
               <p class='card-item-genres'>${response.genres
-                .map(genre => genre.name)
-                .join(',')}
-                  <span class='card-item-genre'></span>
+                .map(genre => genre.name).slice(0, 3).join(', ')}
+                <span class='card-item-genre'></span>
               </p>
             </li>
           </ul>
