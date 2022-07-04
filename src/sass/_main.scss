@@ -11,7 +11,7 @@
 }
 
 .movie-title {
-    color: #000000;
+
     font-family: 'Roboto';
     font-weight: 500;
     font-size: 14px;
@@ -28,15 +28,15 @@
 
 .movie-img {
     display: block;
-    max-width: 280px;
+    width: 100%;
     border-radius: 5px;
 
     @media screen and (min-width: 768px) {
-        max-width: 336px;
+        width: 100%;
     }
 
     @media screen and (min-width: 1280px) {
-        max-width: 395px;
+        width: 100%;
     }
 }
 
@@ -48,6 +48,7 @@
 .movie-info {
     margin-top: 10px;
     margin-bottom: 20px;
+    padding-left: 4px;
 
     @media screen and (min-width: 768px) {
         margin-top: 8px;
@@ -101,4 +102,13 @@
         line-height: calc(14 / 12);
         padding: 3px 12px;
         margin-left: 8px;
+}
+.allert{
+    color: red;
+    display: block;
+ position: absolute;
+    text-align: center;
+    left: 50%;
+    bottom: 20%;
+    transform: translate(-50%,-50%);
 }

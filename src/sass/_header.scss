@@ -1,4 +1,5 @@
 .header{
+    background-color: #FF001B;
     position: relative;
 }
 .header-library{
@@ -42,13 +43,14 @@
     }
 }
 .header-home{
+    background-color: #FF001B;
     background-image: url(../images/Header-mobile1x.jpg);
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
         margin-right: auto;
         margin-left: auto;
-        max-width: 1280px;
+        // max-width: 1280px;
         padding-top: 40px;
         padding-bottom: 92px;
     
@@ -72,7 +74,7 @@
     
         @media screen and (min-width: 1200px) {
             background-image: url(../images/Header-desk1x.jpg);
-            max-width: 1280px;
+            width: 100%;
     
             @media (min-device-pixel-ratio: 2),
             (min-resolution: 192dpi),
