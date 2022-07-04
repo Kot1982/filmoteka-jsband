@@ -109,7 +109,10 @@ function onLocalStorageWatched(event) {
   if (watchedMoviesArray.includes(movieId)) {
     watchedMoviesArray.splice(watchedMoviesArray.indexOf(movieId), 1);
     watchedButton.innerText = buttonLabelWatchedAdd;
-
+    if(watchedMoviesArray === []){
+      localStorage.removeItem('watchedMovies');
+      return
+    }
   } else {
     watchedMoviesArray.push(movieId);
     watchedButton.innerText = buttonLabelWatchedRemove;
