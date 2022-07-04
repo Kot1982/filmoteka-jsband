@@ -1,5 +1,5 @@
 import NewsApiServise from './/api-service';
-
+import addWatchedFilmToLocaleStorage from './local-storage';
 const newsApiServise = new NewsApiServise();
 
 const moviesContainer = document.querySelector('.movies-home');
@@ -21,6 +21,7 @@ async function onMovieClick(event) {
   console.log(response);
   modalContainer.innerHTML = renderMovie(response);
   openModal();
+  addWatchedFilmToLocaleStorage(response);
 }
 
 function renderMovie(response) {
