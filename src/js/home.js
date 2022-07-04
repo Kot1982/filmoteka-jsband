@@ -1,6 +1,6 @@
 import NewsApiServise from './api-service';
 import handlerPagination from './pagination';
-
+import debounce from 'lodash.debounce'
 import themeChanger from './theme';
 
 const newsApiServise = new NewsApiServise();
@@ -20,10 +20,11 @@ export default function renderTrendMovies(currentPage) {
 const totalResult = response.total_results;
     currentPage = response.page;
     //console.log(response.page);
-    
-    const instance = handlerPagination();
+
+       const instance = handlerPagination();
           instance.setItemsPerPage(20);
-    instance.setTotalItems(totalResult);
+      instance.setTotalItems(totalResult);
+
     instance.movePageTo(currentPage);
 
     instance.on('afterMove', event => {
@@ -31,6 +32,8 @@ const totalResult = response.total_results;
       currentPage = newsApiServise.page;
       renderTrendMovies(currentPage)
           });
+    
+   
     const markup = response.results
       .map(({ poster_path, original_title, release_date, genre_ids, vote_average, id }) => {
          getGenreName(genre_ids)
@@ -48,11 +51,13 @@ const totalResult = response.total_results;
       })
       .join('');
     movies.innerHTML = markup;
-    spinner.classList.add('visually-hidden');
+  setTimeout(() => {
+  spinner.classList.add('visually-hidden');
+}, 500)
     
   });
 }
-renderTrendMovies(currentPage);
+  renderTrendMovies(currentPage)
 
 function GenreWriteLocalStorage() {
    newsApiServise.getGenres().then(res => {
@@ -107,31 +112,51 @@ function searchOurMovie() {
   if (ourMovie === "") {
      renderTrendMovies(currentPage);
   }
-  
+  spinner.classList.remove('visually-hidden');
   newsApiServise.searchMovie(ourMovie)
-    .then(renderSearchMovie)
-    .catch(error => {
-    console.log(error)
-    })
+    .then(renderSearchMovie,setTimeout(() => {
+  spinner.classList.add('visually-hidden');
+}, 500))
+    .catch(error => error)
+    
 
 }
-function renderSearchMovie(resp) {
-   const newMarkup = resp.results
-      .map(({ poster_path, original_title, release_date, genre_ids,  id }) => {
-         getGenreName(genre_ids)
+ function renderSearchMovie(resp) {
+      
+//  const totalResult = resp.total_results;
+//     currentPage = resp.page;
+
+//     if (mainInput.value.trim() !== " ") {
+//        const instance = handlerPagination();
+//           instance.setItemsPerPage(20);
+//       instance.setTotalItems(totalResult);
+
+//     instance.movePageTo(currentPage);
+
+//     instance.on('afterMove', event => {
+//             newsApiServise.page = event.page;
+//       currentPage = newsApiServise.page;
+//       renderTrendMovies(currentPage)
+//           });
+//     }
+  
+  const newMarkup = resp.results
+
+  .map(
+    ({ poster_path, original_title, release_date, genre_ids, id, src = poster_path === null ?'https://d2j1wkp1bavyfs.cloudfront.net/legacy/assets/mf-no-poster-available-v2.png' : `https://image.tmdb.org/t/p/w500${poster_path}` }) => {
+        getGenreName(genre_ids)
+       
         return `<div class="movie-card" data-movieId=${id}>
-                 <img class="movie-img" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="card">
+                 <img class="movie-img" src="${src}" alt="card">
             
                  <div class="movie-info">
                      <h2 class="movie-title">${original_title}</h2>
-                    <h3 class="span-title">${(genre).join(',  ')} | ${release_date.slice(
-    0,
-    4,
-  )}</h3>
+                    <h3 class="span-title">${(genre).join(',  ')} | ${release_date.slice(0,4,)}</h3>
                      </div>
                  </div>`;
       })
-      .join('');
+    .join('');
+
   movies.innerHTML = newMarkup;
   if (resp.results.length === 0) {
     allertMovie.classList.remove('visually-hidden')
@@ -139,8 +164,8 @@ function renderSearchMovie(resp) {
   else {
      allertMovie.classList.add('visually-hidden')
   }
-  console.log(resp.results)
+
 }
 
 
-  mainInput.addEventListener('input', searchOurMovie)
+  mainInput.addEventListener('input', debounce(searchOurMovie,300))
