@@ -47,7 +47,7 @@ export default class NewsApiServise {
   }
 async searchMovie(movie) {
     return await Axios.get(
-      `${url}search/movie?api_key=${key}&query=${movie}`
+      `${url}search/movie?api_key=${key}&query=${movie}&page=${this.page}`
     ).then(response => {
       window.scrollTo(0, 0)
       return response.data;
