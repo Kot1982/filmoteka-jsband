@@ -28,6 +28,10 @@ watched.addEventListener('click', onLocalStorageWatched);
 const que = document.querySelector('.card-btn-que');
 que.addEventListener('click', onLocalStorageQue);
   addWatchedFilmToLocaleStorage(response);
+  const watched = document.querySelector('.card-btn-watched');
+watched.addEventListener('click', onLocalStorageWatched);
+const que = document.querySelector('.card-btn-que');
+que.addEventListener('click', onLocalStorageQue);
 }
 
 function renderMovie(response) {
@@ -110,6 +114,11 @@ function onLocalStorageWatched(event) {
   if (watchedMoviesArray.includes(movieId)) {
     watchedMoviesArray.splice(watchedMoviesArray.indexOf(movieId), 1);
     watchedButton.innerText = buttonLabelWatchedAdd;
+
+    if(watchedMoviesArray === []){
+      localStorage.removeItem('watchedMovies');
+      return
+    }
 
   } else {
     watchedMoviesArray.push(movieId);
