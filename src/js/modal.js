@@ -24,6 +24,8 @@ async function onMovieClick(event) {
   openModal();
   const watched = document.querySelector('.card-btn-watched');
 watched.addEventListener('click', onLocalStorageWatched);
+const que = document.querySelector('.card-btn-que');
+que.addEventListener('click', onLocalStorageQue);
 }
 
 function renderMovie(response) {
@@ -64,7 +66,7 @@ function renderMovie(response) {
           <div class='card-list-btn'>
             <button type='button' class='card-btn-watched' data-movieId=${response.id}>add to <br /> Watched</button>
             <button type='button' class='card-btn-que' data-movieId=${response.id}>add to queue</button>
-          </div>gi
+          </div>
         </div>
       </div>
   `;
@@ -85,7 +87,7 @@ export function onCloseModal() {
 }
 
 
-// добавь в LocalStrage
+// добавляє фільми при кліку в LocalStrage
 
 
 const buttonLabelWatchedAdd = 'add to Watched';
@@ -106,6 +108,7 @@ function onLocalStorageWatched(event) {
   if (watchedMoviesArray.includes(movieId)) {
     watchedMoviesArray.splice(watchedMoviesArray.indexOf(movieId), 1);
     watchedButton.innerText = buttonLabelWatchedAdd;
+    
   } else {
     watchedMoviesArray.push(movieId);
     watchedButton.innerText = buttonLabelWatchedRemove;
@@ -115,6 +118,23 @@ function onLocalStorageWatched(event) {
 }
 
 
+function onLocalStorageQue(event) {
+  const queuedButton = event.target;
+  const movieId = event.target.dataset.movieid;
+  console.log(movieId);
+  const queuedMovies = localStorage.getItem('queuedMovies');
+  const queuedMoviesArray = JSON.parse(queuedMovies) || [];
+  console.log(queuedMoviesArray);
+  if (queuedMoviesArray.includes(movieId)) {
+    queuedMoviesArray.splice(queuedMoviesArray.indexOf(movieId), 1);
+    queuedButton.innerText = buttonLabelQueuedAdd;
+  } else {
+    queuedMoviesArray.push(movieId);
+    queuedButton.innerText = buttonLabelQueueRemove;
+  }
+  localStorage.setItem('queuedMovies', JSON.stringify(queuedMoviesArray));
+  console.log(queuedMoviesArray);
+}
 
 
 
