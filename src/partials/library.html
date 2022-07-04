@@ -1,4 +1,23 @@
 <header class="header header-library">
+    <div class="toolbar">
+        <div class="theme-switch">
+            <svg class="theme-switch__icon" role="img" aria-label="Иконка солнца">
+                <use href="./images/symbol-defs.svg#icon-sun"></use>
+            </svg>
+    
+            <div class="theme-switch__control">
+                <input class="theme-switch__toggle" type="checkbox" name="theme" id="theme-switch-toggle"
+                    aria-label="Переключить между тёмной и светлой темой" />
+                <label aria-hidden="true" class="theme-switch__track" for="theme-switch-toggle">
+                </label>
+                <div aria-hidden="true" class="theme-switch__marker"></div>
+            </div>
+    
+            <svg class="theme-switch__icon" aria-label="Иконка луны">
+                <use href="./images/symbol-defs.svg#icon-moon"></use>
+            </svg>
+        </div>
+    </div>
     <div class="container">
         <nav class="header-content nav-library">
             <a href="./index.html" class="header-logo">
@@ -46,8 +65,71 @@
         <p class="footer-text"> Developed with
             <svg class="footer-icon" width="14" height="12">
                 <use href="./images/symbol-defs.svg#icon-heart"></use>
-            </svg> by
-            <a class="footer-link" href="">GoIt Students</a>
+            </svg> 
+            <a class="footer-link" href="" data-modal-open>GoIt Students</a>
         </p>
+        <div data-modal class="backdrop is-hidden">
+            <div class="our__team-modal">
+                <h3 class="our_team-title">Our team</h3>
+                <ul class="team_list">
+                    <li class="team_item">
+                        <img class="team_img"
+                            src="./images/modal-team/Kost-Oli.jpg"
+                            alt="img">
+                        <p class="team_disc">Kostiantyn Oliinyk</p>
+                    </li>
+                    <li class="team_item">
+                        <img class="team_img"
+                            src="./images/modal-team/Olesya.jpg"
+                            alt="img">
+                        <p class="team_disc">Olesya LZ</p>
+                    </li>
+                    <li class="team_item">
+                        <img class="team_img"
+                            src="https://i.pinimg.com/236x/82/37/5f/82375fa0115f41490b1129ad44794071--funny-minion-minions-quotes.jpg"
+                            alt="img">
+                        <p class="team_disc">Antonina Bondar</p>
+                    </li>
+                    <li class="team_item">
+                        <img class="team_img"
+                            src="https://i.pinimg.com/236x/82/37/5f/82375fa0115f41490b1129ad44794071--funny-minion-minions-quotes.jpg"
+                            alt="img">
+                        <p class="team_disc">Oksana ???</p>
+                    </li>
+                    <li class="team_item">
+                        <img class="team_img"
+                            src="./images/modal-team/Olex-Putn.jpg"
+                            alt="img">
+                        <p class="team_disc">Oleksii Putnenko</p>
+                    </li>
+                    <li class="team_item">
+                        <img class="team_img"
+                            src="https://i.pinimg.com/236x/82/37/5f/82375fa0115f41490b1129ad44794071--funny-minion-minions-quotes.jpg"
+                            alt="img">
+                        <p class="team_disc">Taras Shapovalov</p>
+                    </li>
+                    <li class="team_item">
+                        <img class="team_img"
+                            src="https://i.pinimg.com/236x/82/37/5f/82375fa0115f41490b1129ad44794071--funny-minion-minions-quotes.jpg"
+                            alt="img">
+                        <p class="team_disc">Yuliia Kovalchuk</p>
+                    </li>
+                    <li class="team_item">
+                        <img class="team_img"
+                            src="https://i.pinimg.com/236x/82/37/5f/82375fa0115f41490b1129ad44794071--funny-minion-minions-quotes.jpg"
+                            alt="img">
+                        <p class="team_disc">Alex Sidorenko</p>
+                    </li>
+                    <li class="team_item">
+                        <img class="team_img"
+                            src="https://i.pinimg.com/236x/82/37/5f/82375fa0115f41490b1129ad44794071--funny-minion-minions-quotes.jpg"
+                            alt="img">
+                        <p class="team_disc">Juliia Volokhovych</p>
+                    </li>
+                </ul>
+                <button type="button" data-modal-close class="close__modal"><img class="modal-svg"
+                        src="./images/modal-team/svg-close.svg"></button>
+            </div>
+        </div>
     </div>
 </footer>

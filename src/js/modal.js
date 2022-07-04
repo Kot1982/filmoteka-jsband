@@ -5,7 +5,7 @@ const newsApiServise = new NewsApiServise();
 const moviesContainer = document.querySelector('.movies-home');
 const modalContainer = document.querySelector('.modal-conteiner');
 console.log(moviesContainer);
-const backdrop = document.querySelector('.backdrop-movie');
+export const backdrop = document.querySelector('.backdrop-movie');
 const closeBtn = document.querySelector('.modal-close-btn.close');
 console.log(closeBtn);
 
@@ -27,8 +27,8 @@ async function onMovieClick(event) {
 function renderMovie(response) {
   const markup = `
    <img class="modal-conteiner-img" src="https://image.tmdb.org/t/p/w500${
-    response.poster_path
-  }" alt="card">
+     response.poster_path
+   }" alt="card">
   <div class='card-container'>
           <h2 class='card-title'>${response.original_title}</h2>
           <ul class='card-list'>
@@ -52,9 +52,8 @@ function renderMovie(response) {
             <li class='card-item'>
               Genre
               <p class='card-item-genres'>${response.genres
-                .map(genre => genre.name)
-                .join(',')}
-                  <span class='card-item-genre'></span>
+                .map(genre => genre.name).slice(0, 3).join(', ')}
+                <span class='card-item-genre'></span>
               </p>
             </li>
           </ul>
@@ -77,7 +76,7 @@ function openModal() {
   // document.overflow = 'hidden';
 }
 
-function onCloseModal() {
+export function onCloseModal() {
   // modalContainer.classList.remove('is-open');
   backdrop.classList.remove('is-open');
   backdrop.classList.add('is-hidden');

@@ -59,11 +59,23 @@
         margin-top: 12px;
     }
 }
+.movie-card:hover,
+.movie-card:focus{
+    display: block;
+        border-radius: 0 0 10px 10px;
+        transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1),
+            box-shadow 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    
+        
+            transform: scale(1.05);
+            box-shadow: 0px 3px 18px 2px rgba(54, 2, 46, 0.66);
+        
+}
 
-// .movie-card {
+.movie-img {
 
-//     margin-right: 16px;
-// }
+    height: 92%;
+}
 
 .movies {
     @media screen and (min-width: 768px) {
