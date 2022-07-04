@@ -1,6 +1,6 @@
 import Pagination from 'tui-pagination';
 import 'tui-pagination/dist/tui-pagination.css';
-import '../sass/_pagination.scss'
+import '../sass/_pagination.scss';
 
 const options = {
   totalItems: 1000,
@@ -12,7 +12,8 @@ const options = {
   lastItemClassName: 'tui-last-child',
   template: {
     page: '<a href="#" class="tui-page-btn  ">{{page}}</a>',
-    currentPage: '<strong class="tui-page-btn tui-is-selected  ">{{page}}</strong>',
+    currentPage:
+      '<strong class="tui-page-btn tui-is-selected  ">{{page}}</strong>',
     moveButton:
       '<a href="#" class="tui-page-btn tui-{{type}}">' +
       '<span class="tui-ico-{{type}}">{{type}}</span>' +
@@ -27,8 +28,6 @@ const options = {
       '</a>',
   },
 };
-
-   
 
 const handlerPagination = () => {
   const container = document.getElementById('tui-pagination-container');
