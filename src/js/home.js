@@ -7,6 +7,8 @@ const newsApiServise = new NewsApiServise();
 const movies = document.querySelector('.movies-home');
 const spinner = document.querySelector('.sk-circle');
 const swicher = document.querySelector(".theme-switch__toggle");
+const mainInput = document.querySelector(".header-input");
+const allertMovie = document.querySelector(".allert"); 
 let genre;
 let currentPage = 1;
 swicher.addEventListener('change', themeChanger);
@@ -99,5 +101,46 @@ function getGenreName(genre_ids) {
 //   spinner.classList.add('visually-hidden');
 // })
 //   }
+function searchOurMovie() {
+ 
+  const ourMovie = mainInput.value.trim()
+  if (ourMovie === "") {
+     renderTrendMovies(currentPage);
+  }
+  
+  newsApiServise.searchMovie(ourMovie)
+    .then(renderSearchMovie)
+    .catch(error => {
+    console.log(error)
+    })
+
+}
+function renderSearchMovie(resp) {
+   const newMarkup = resp.results
+      .map(({ poster_path, original_title, release_date, genre_ids,  id }) => {
+         getGenreName(genre_ids)
+        return `<div class="movie-card" data-movieId=${id}>
+                 <img class="movie-img" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="card">
+            
+                 <div class="movie-info">
+                     <h2 class="movie-title">${original_title}</h2>
+                    <h3 class="span-title">${(genre).join(',  ')} | ${release_date.slice(
+    0,
+    4,
+  )}</h3>
+                     </div>
+                 </div>`;
+      })
+      .join('');
+  movies.innerHTML = newMarkup;
+  if (resp.results.length === 0) {
+    allertMovie.classList.remove('visually-hidden')
+  }
+  else {
+     allertMovie.classList.add('visually-hidden')
+  }
+  console.log(resp.results)
+}
 
 
+  mainInput.addEventListener('input', searchOurMovie)
