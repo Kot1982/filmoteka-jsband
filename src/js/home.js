@@ -8,10 +8,7 @@ const spinner = document.querySelector('.sk-circle');
 let genre;
 let currentPage = 1;
 GenreWriteLocalStorage()
-
-
-
-function renderTrendMovies(currentPage) {
+export default function renderTrendMovies(currentPage) {
   spinner.classList.remove('visually-hidden');
   newsApiServise.getTrendMovies(currentPage).then(response => {
     //console.log(response.results);
@@ -23,7 +20,7 @@ const totalResult = response.total_results;
           instance.setItemsPerPage(20);
     instance.setTotalItems(totalResult);
     instance.movePageTo(currentPage);
-    
+
     instance.on('afterMove', event => {
             newsApiServise.page = event.page;
       currentPage = newsApiServise.page;
