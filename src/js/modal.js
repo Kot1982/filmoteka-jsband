@@ -22,6 +22,11 @@ async function onMovieClick(event) {
   console.log(response);
   modalContainer.innerHTML = renderMovie(response);
   openModal();
+
+  const watched = document.querySelector('.card-btn-watched');
+watched.addEventListener('click', onLocalStorageWatched);
+const que = document.querySelector('.card-btn-que');
+que.addEventListener('click', onLocalStorageQue);
   addWatchedFilmToLocaleStorage(response);
   const watched = document.querySelector('.card-btn-watched');
 watched.addEventListener('click', onLocalStorageWatched);
@@ -109,10 +114,12 @@ function onLocalStorageWatched(event) {
   if (watchedMoviesArray.includes(movieId)) {
     watchedMoviesArray.splice(watchedMoviesArray.indexOf(movieId), 1);
     watchedButton.innerText = buttonLabelWatchedAdd;
+
     if(watchedMoviesArray === []){
       localStorage.removeItem('watchedMovies');
       return
     }
+
   } else {
     watchedMoviesArray.push(movieId);
     watchedButton.innerText = buttonLabelWatchedRemove;
