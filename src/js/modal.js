@@ -108,7 +108,7 @@ function onLocalStorageWatched(event) {
   if (watchedMoviesArray.includes(movieId)) {
     watchedMoviesArray.splice(watchedMoviesArray.indexOf(movieId), 1);
     watchedButton.innerText = buttonLabelWatchedAdd;
-    
+
   } else {
     watchedMoviesArray.push(movieId);
     watchedButton.innerText = buttonLabelWatchedRemove;
@@ -121,10 +121,9 @@ function onLocalStorageWatched(event) {
 function onLocalStorageQue(event) {
   const queuedButton = event.target;
   const movieId = event.target.dataset.movieid;
-  console.log(movieId);
   const queuedMovies = localStorage.getItem('queuedMovies');
   const queuedMoviesArray = JSON.parse(queuedMovies) || [];
-  console.log(queuedMoviesArray);
+  // console.log(queuedMoviesArray);
   if (queuedMoviesArray.includes(movieId)) {
     queuedMoviesArray.splice(queuedMoviesArray.indexOf(movieId), 1);
     queuedButton.innerText = buttonLabelQueuedAdd;
