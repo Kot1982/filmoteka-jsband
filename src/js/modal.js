@@ -87,7 +87,7 @@ export function onCloseModal() {
 }
 
 
-// добавляє фільми при кліку в LocalStrage
+// добавляє фільм при кліку в LocalStrage
 
 
 const buttonLabelWatchedAdd = 'add to Watched';
@@ -134,6 +134,7 @@ function onLocalStorageQue(event) {
   localStorage.setItem('queuedMovies', JSON.stringify(queuedMoviesArray));
   console.log(queuedMoviesArray);
 }
+
 
 
 
