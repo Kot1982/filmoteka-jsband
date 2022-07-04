@@ -9,6 +9,7 @@ export const backdrop = document.querySelector('.backdrop-movie');
 const closeBtn = document.querySelector('.modal-close-btn.close');
 console.log(closeBtn);
 
+
 moviesContainer.addEventListener('click', onMovieClick);
 closeBtn.addEventListener('click', onCloseModal);
 
@@ -21,6 +22,8 @@ async function onMovieClick(event) {
   console.log(response);
   modalContainer.innerHTML = renderMovie(response);
   openModal();
+  const watched = document.querySelector('.card-btn-watched');
+watched.addEventListener('click', onLocalStorageWatched);
 }
 
 function renderMovie(response) {
@@ -59,9 +62,9 @@ function renderMovie(response) {
           <p class='card-description'>About</p>
           <p class='card-text'>${response.overview}</p>
           <div class='card-list-btn'>
-            <button type='button' class='card-btn-watched'>add to <br /> Watched</button>
-            <button type='button' class='card-btn-que'>add to queue</button>
-          </div>
+            <button type='button' class='card-btn-watched' data-movieId=${response.id}>add to <br /> Watched</button>
+            <button type='button' class='card-btn-que' data-movieId=${response.id}>add to queue</button>
+          </div>gi
         </div>
       </div>
   `;
@@ -80,3 +83,41 @@ export function onCloseModal() {
   backdrop.classList.remove('is-open');
   backdrop.classList.add('is-hidden');
 }
+
+
+// добавь в LocalStrage
+
+
+const buttonLabelWatchedAdd = 'add to Watched';
+const buttonLabelWatchedRemove = 'remove from Watched';
+const buttonLabelQueuedAdd = 'add to Queue';
+const buttonLabelQueueRemove = 'remove from Queue';
+
+
+
+function onLocalStorageWatched(event) {
+  const watchedButton = event.target;
+  const movieId = event.target.dataset.movieid;
+  console.log(movieId);
+  
+  const watchedMovies = localStorage.getItem('watchedMovies');
+  const watchedMoviesArray = JSON.parse(watchedMovies) || [];
+  console.log(watchedMoviesArray);
+  if (watchedMoviesArray.includes(movieId)) {
+    watchedMoviesArray.splice(watchedMoviesArray.indexOf(movieId), 1);
+    watchedButton.innerText = buttonLabelWatchedAdd;
+  } else {
+    watchedMoviesArray.push(movieId);
+    watchedButton.innerText = buttonLabelWatchedRemove;
+  }
+  localStorage.setItem('watchedMovies', JSON.stringify(watchedMoviesArray));
+  console.log(watchedMoviesArray);
+}
+
+
+
+
+
+
+
+
