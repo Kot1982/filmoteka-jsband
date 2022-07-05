@@ -65,7 +65,10 @@ const totalResult = response.total_results;
     
   });
 }
-  renderTrendMovies(currentPage)
+
+     renderTrendMovies(currentPage);
+
+
 
 function GenreWriteLocalStorage() {
    newsApiServise.getGenres().then(res => {
@@ -114,39 +117,50 @@ function getGenreName(genre_ids) {
 //   spinner.classList.add('visually-hidden');
 // })
 //   }
-function searchOurMovie() {
+function searchOurMovie(currentPage) {
+
+  
  
-  const ourMovie = mainInput.value.trim()
+  const ourMovie = mainInput.value
   if (ourMovie === "") {
      renderTrendMovies(currentPage);
   }
+  
   spinner.classList.remove('visually-hidden');
   newsApiServise.searchMovie(ourMovie)
-    .then(renderSearchMovie,setTimeout(() => {
+    .then(resp => {
+    renderSearchMovie(resp)
+      setTimeout(() => {
   spinner.classList.add('visually-hidden');
-}, 500))
+}, 500)
+       const totalResult = resp.total_results;
+      currentPage = resp.page;
+  
+
+
+    
+       const instance = handlerPagination();
+          instance.setItemsPerPage(20);
+      instance.setTotalItems(totalResult);
+
+    instance.movePageTo(currentPage);
+
+    instance.on('afterMove', event => {
+            newsApiServise.page = event.page;
+      currentPage = newsApiServise.page;
+      
+     searchOurMovie(currentPage)
+          });
+      
+     })
     .catch(error => error)
     
 
 }
  function renderSearchMovie(resp) {
-      
-//  const totalResult = resp.total_results;
-//     currentPage = resp.page;
+     
 
-//     if (mainInput.value.trim() !== " ") {
-//        const instance = handlerPagination();
-//           instance.setItemsPerPage(20);
-//       instance.setTotalItems(totalResult);
-
-//     instance.movePageTo(currentPage);
-
-//     instance.on('afterMove', event => {
-//             newsApiServise.page = event.page;
-//       currentPage = newsApiServise.page;
-//       renderTrendMovies(currentPage)
-//           });
-//     }
+    
   
   const newMarkup = resp.results
 
@@ -176,4 +190,5 @@ function searchOurMovie() {
 }
 
 
-  mainInput.addEventListener('input', debounce(searchOurMovie,300))
+mainInput.addEventListener('input', debounce(searchOurMovie, 300))
+
