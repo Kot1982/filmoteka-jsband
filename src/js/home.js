@@ -3,11 +3,20 @@ import handlerPagination from './pagination';
 import toggleModal from './modal-team';
 import moviesArray from './index';
 import writeLocalStor from './index'
+
+import debounce from 'lodash.debounce'
+import themeChanger from './theme';
+
+
 const newsApiServise = new NewsApiServise();
 const movies = document.querySelector('.movies-home');
 const spinner = document.querySelector('.sk-circle');
+const swicher = document.querySelector(".theme-switch__toggle");
+const mainInput = document.querySelector(".header-input");
+const allertMovie = document.querySelector(".allert"); 
 let genre;
 let currentPage = 1;
+swicher.addEventListener('change', themeChanger);
 GenreWriteLocalStorage()
 export default function renderTrendMovies(currentPage) {
   //  localStorage.setItem("moviess", JSON.stringify(moviesArray));
@@ -18,10 +27,11 @@ export default function renderTrendMovies(currentPage) {
 const totalResult = response.total_results;
     currentPage = response.page;
     //console.log(response.page);
-    
-    const instance = handlerPagination();
+
+       const instance = handlerPagination();
           instance.setItemsPerPage(20);
-    instance.setTotalItems(totalResult);
+      instance.setTotalItems(totalResult);
+
     instance.movePageTo(currentPage);
 
     instance.on('afterMove', event => {
@@ -30,6 +40,8 @@ const totalResult = response.total_results;
       currentPage = newsApiServise.page;
       renderTrendMovies(currentPage)
           });
+    
+   
     const markup = response.results
       .map(({ poster_path, original_title, release_date, genre_ids, vote_average, id }) => {
          getGenreName(genre_ids)
@@ -47,11 +59,13 @@ const totalResult = response.total_results;
       })
       .join('');
     movies.innerHTML = markup;
-    spinner.classList.add('visually-hidden');
+  setTimeout(() => {
+  spinner.classList.add('visually-hidden');
+}, 500)
     
   });
 }
-renderTrendMovies(currentPage);
+  renderTrendMovies(currentPage)
 
 function GenreWriteLocalStorage() {
    newsApiServise.getGenres().then(res => {
@@ -100,54 +114,66 @@ function getGenreName(genre_ids) {
 //   spinner.classList.add('visually-hidden');
 // })
 //   }
-const swicher = document.querySelector(".theme-switch__toggle");
-const body = document.querySelector("body");
-const theme = {
-  light: 'light-theme',
-  dark: 'dark-theme',
-};
-
-
-if (!localStorage.getItem("theme")) {
-    body.classList.add('light-theme')
-    swicher.classList.add('theme-switch__toggle')
-    localStorage.setItem('theme', theme.light)
-   
-}
-
-else {
-    console.log(localStorage.getItem("theme"))
-
-    body.classList.add(localStorage.getItem("theme"))
+function searchOurMovie() {
+ 
+  const ourMovie = mainInput.value.trim()
+  if (ourMovie === "") {
+     renderTrendMovies(currentPage);
+  }
+  spinner.classList.remove('visually-hidden');
+  newsApiServise.searchMovie(ourMovie)
+    .then(renderSearchMovie,setTimeout(() => {
+  spinner.classList.add('visually-hidden');
+}, 500))
+    .catch(error => error)
     
+
 }
+ function renderSearchMovie(resp) {
+      
+//  const totalResult = resp.total_results;
+//     currentPage = resp.page;
 
-if (body.classList.contains("dark-theme")) {
-    swicher.checked = true
-}
-swicher.addEventListener('change', themeChanger);
+//     if (mainInput.value.trim() !== " ") {
+//        const instance = handlerPagination();
+//           instance.setItemsPerPage(20);
+//       instance.setTotalItems(totalResult);
 
+//     instance.movePageTo(currentPage);
 
-function themeChanger() {
-  if (body.classList.contains("dark-theme")){
-        body.classList.add("light-theme");
-      body.classList.remove("dark-theme");
-      localStorage.setItem('theme', theme.light)
-     
-    //   swicher.classList.add("false");
-    //   swicher.classList.remove("true");
-     
-    }
+//     instance.on('afterMove', event => {
+//             newsApiServise.page = event.page;
+//       currentPage = newsApiServise.page;
+//       renderTrendMovies(currentPage)
+//           });
+//     }
+  
+  const newMarkup = resp.results
+
+  .map(
+    ({ poster_path, original_title, release_date, genre_ids, id, src = poster_path === null ?'https://d2j1wkp1bavyfs.cloudfront.net/legacy/assets/mf-no-poster-available-v2.png' : `https://image.tmdb.org/t/p/w500${poster_path}` }) => {
+        getGenreName(genre_ids)
+       
+        return `<div class="movie-card" data-movieId=${id}>
+                 <img class="movie-img" src="${src}" alt="card">
+            
+                 <div class="movie-info">
+                     <h2 class="movie-title">${original_title}</h2>
+                    <h3 class="span-title">${(genre).join(',  ')} | ${release_date.slice(0,4,)}</h3>
+                     </div>
+                 </div>`;
+      })
+    .join('');
+
+  movies.innerHTML = newMarkup;
+  if (resp.results.length === 0) {
+    allertMovie.classList.remove('visually-hidden')
+  }
   else {
-      body.classList.add("dark-theme");
-      body.classList.remove("light-theme");
-      localStorage.setItem('theme', theme.dark)
-    //   swicher.classList.add("true");
-    //   swicher.classList.remove("false");
-     
-    }
+     allertMovie.classList.add('visually-hidden')
+  }
+
 }
 
 
-
-
+  mainInput.addEventListener('input', debounce(searchOurMovie,300))
