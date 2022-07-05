@@ -4,15 +4,14 @@
  const root = document.querySelector("#root");
 console.log(root);
 const rootQueue = document.querySelector("#root-queue"); 
-const watched = document.querySelector('.lib-watched-btn');
-watched.addEventListener('click', onBtnWatchedShow)
-const queue = document.querySelector('.lib-queue-btn');
-queue.addEventListener('click', onBtnShowQueue)
+
+
 
 let watchedFilms = [];
 let queFilms = [];
 
-console.log(rootQueue)
+console.log(watchedFilms);
+console.log(queFilms)
 
 
 function onBtnWatchedShow() {
@@ -42,25 +41,17 @@ function onBtnShowQueue() {
     // root.classList.toggle('root-height')
 }
 
-// function onWatchedBtnClick() {
-//   queue.classList.remove('active');
-//   watched.classList.add('active');
-// }
-
-// function onQueueBtnClick() {
-//   watched.classList.remove('active');
-//   queue.classList.add('active');
-// }
 
 
 export default function addWatchedFilmToLocaleStorage(filmData) {
 
     const btnWatched = document.querySelector('.card-btn-watched');
+   
     const btnQueue = document.querySelector('.card-btn-que');
     btnQueue.addEventListener('click', onBtnQue);
     //const btnRemoweWatch = document.querySelector('.')
     btnWatched.addEventListener('click', onBtnWatchedClick);
-
+ console.log(btnQueue)
 
 function onBtnWatchedClick(e) {
     try {
@@ -75,6 +66,7 @@ function onBtnWatchedClick(e) {
         if (filmData.id === film.id) {
             const filteredFilm = watchedFilms.filter(film => film.id !== filmData.id);
             watchedFilms = [...filteredFilm];
+            console.log(watchedFilms)
             localStorage.setItem('watched', JSON.stringify(watchedFilms));
             return;
         }
@@ -239,3 +231,7 @@ function renderMoviesQueue() {
 //   addWatchedFilmToLocaleStorage(response);
 // }
 
+const watched = document.querySelector('.lib-watched-btn');
+watched.addEventListener('click', onBtnWatchedShow)
+const queue = document.querySelector('.lib-queue-btn');
+queue.addEventListener('click', onBtnShowQueue)
