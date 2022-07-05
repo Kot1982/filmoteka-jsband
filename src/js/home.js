@@ -23,6 +23,7 @@ export default function renderTrendMovies(currentPage) {
   //  writeLocalStor()
   spinner.classList.remove('visually-hidden');
   newsApiServise.getTrendMovies(currentPage).then(response => {
+     newsApiServise.resetPage()
     //console.log(response.results);
 const totalResult = response.total_results;
     currentPage = response.page;
@@ -123,12 +124,13 @@ function searchOurMovie(currentPage) {
  
   const ourMovie = mainInput.value
   if (ourMovie === "") {
-     renderTrendMovies(currentPage);
+    return renderTrendMovies(currentPage);
   }
-  
+ 
   spinner.classList.remove('visually-hidden');
   newsApiServise.searchMovie(ourMovie)
     .then(resp => {
+      newsApiServise.resetPage()
     renderSearchMovie(resp)
       setTimeout(() => {
   spinner.classList.add('visually-hidden');
@@ -139,19 +141,18 @@ function searchOurMovie(currentPage) {
 
 
     
-       const instance = handlerPagination();
+      const instance = handlerPagination();
+
           instance.setItemsPerPage(20);
       instance.setTotalItems(totalResult);
-
     instance.movePageTo(currentPage);
-
     instance.on('afterMove', event => {
             newsApiServise.page = event.page;
       currentPage = newsApiServise.page;
-      
+       console.log(event.page)
      searchOurMovie(currentPage)
           });
-      
+     
      })
     .catch(error => error)
     
