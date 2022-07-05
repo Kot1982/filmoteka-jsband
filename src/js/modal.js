@@ -26,7 +26,8 @@ async function onMovieClick(event) {
   const watched = document.querySelector('.card-btn-watched');
 watched.addEventListener('click', onLocalStorageWatched);
 const que = document.querySelector('.card-btn-que');
-que.addEventListener('click', onLocalStorageQue);
+  que.addEventListener('click', onLocalStorageQue);
+  console.log(response)
   addWatchedFilmToLocaleStorage(response);
   
 }
