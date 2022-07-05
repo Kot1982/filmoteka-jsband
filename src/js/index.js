@@ -2,17 +2,65 @@
 // import NewsApiServise from './api-service';
 // export let moviesArray = [];
  const root = document.querySelector("#root");
-console.log(root)
+console.log(root);
+const rootQueue = document.querySelector("#root-queue"); 
+const watched = document.querySelector('.lib-watched-btn');
+watched.addEventListener('click', onBtnWatchedShow)
+const queue = document.querySelector('.lib-queue-btn');
+queue.addEventListener('click', onBtnShowQueue)
 
 let watchedFilms = [];
-//import root from './index'
- //const root = document.querySelector("#root");
-console.log(root)
+let queFilms = [];
+
+console.log(rootQueue)
+
+
+function onBtnWatchedShow() {
+    //onWatchedBtnClick()
+    if (root.classList.contains('root-height') && rootQueue.classList.contains('root-show')) {
+        root.classList.remove('root-height');
+        root.classList.add('root-show');
+        rootQueue.classList.remove('root-show');
+        rootQueue.classList.add('root-height')
+        
+    }
+    // root.classList.add('root-show');
+
+    // rootQueue.classList.remove('root-height')
+}
+
+function onBtnShowQueue() {
+    //onQueueBtnClick()
+    if (root.classList.contains('root-show') &&rootQueue.classList.contains('root-height')) {
+        root.classList.remove('root-show');
+        root.classList.add('root-height');
+        rootQueue.classList.remove('root-height');
+        rootQueue.classList.add('root-show')
+        
+    }
+    // rootQueue.classList.toggle('root-show');
+    // root.classList.toggle('root-height')
+}
+
+// function onWatchedBtnClick() {
+//   queue.classList.remove('active');
+//   watched.classList.add('active');
+// }
+
+// function onQueueBtnClick() {
+//   watched.classList.remove('active');
+//   queue.classList.add('active');
+// }
+
+
 export default function addWatchedFilmToLocaleStorage(filmData) {
 
     const btnWatched = document.querySelector('.card-btn-watched');
-
+    const btnQueue = document.querySelector('.card-btn-que');
+    btnQueue.addEventListener('click', onBtnQue);
+    //const btnRemoweWatch = document.querySelector('.')
     btnWatched.addEventListener('click', onBtnWatchedClick);
+
 
 function onBtnWatchedClick(e) {
     try {
@@ -22,6 +70,8 @@ function onBtnWatchedClick(e) {
     }
 
     for (const film of watchedFilms) {
+        console.log(filmData.id);
+        console.log(film.id)
         if (filmData.id === film.id) {
             const filteredFilm = watchedFilms.filter(film => film.id !== filmData.id);
             watchedFilms = [...filteredFilm];
@@ -31,10 +81,43 @@ function onBtnWatchedClick(e) {
     }
     watchedFilms.push(filmData);
     localStorage.setItem('watched', JSON.stringify(watchedFilms));
+    }
+    
+    function onBtnQue(e) {
+       try {
+        queFilms = [...JSON.parse(localStorage.getItem('queue'))];
+    } catch (error) {
+        queFilms = [];
+        }
+        for (const film of queFilms) {
+        console.log(filmData.id);
+        console.log(film.id)
+        if (filmData.id === film.id) {
+            const filteredFilm = queFilms.filter(film => film.id !== filmData.id);
+            queFilms = [...filteredFilm];
+            localStorage.setItem('queue', JSON.stringify(queFilms));
+            return;
+        }
+        }
+         queFilms.push(filmData);
+    localStorage.setItem('queue', JSON.stringify( queFilms));
 }
+
+
+
 }
+
+// function onBtnRemoveWatch(e) {
+//        try {
+//         watchedFilms = [...JSON.parse(localStorage.getItem('watched'))];
+//     } catch (error) {
+//         watchedFilms = [];
+//     }
+// }
+
 //console.log(localStorage.getItem('watched'))
 console.log(JSON.parse(localStorage.getItem("watched")))
+console.log(JSON.parse(localStorage.getItem("queue")))
 
 function renderMovies() {
     const movies =JSON.parse( localStorage.getItem("watched"));
@@ -60,6 +143,30 @@ function renderMovies() {
  
 }
 renderMovies();
+renderMoviesQueue()
+function renderMoviesQueue() {
+    const moviesQueue =JSON.parse( localStorage.getItem("queue"));
+  console.log(moviesQueue)
+    const listMurkup = moviesQueue.map(movie => {
+        console.log(movie)
+        const liEl = `<div class="movie-card" data-movieId=${movie.id}>
+                 <img class="movie-img" src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="card">
+            
+                 <div class="movie-info">
+                     <h2 class="movie-title">${movie.original_title}</h2>
+                    <h3 class="span-title">${movie.genres
+                .map(genre => genre.name).slice(0, 3).join(', ')} | ${movie.release_date.slice(
+    0,
+    4,
+  )}</h3>
+                     </div>
+                 </div>` ;
+        return liEl;
+    }).join('');
+    console.log(root)
+   rootQueue.insertAdjacentHTML('beforeend', listMurkup)
+ 
+}
 
 // export default function writeLocalStor() {
 //     const newsApiServise = new NewsApiServise();
