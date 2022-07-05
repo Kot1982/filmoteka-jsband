@@ -1,6 +1,5 @@
 .footer {
-    position: sticky;
-    bottom: 0vh;
+margin-top: auto;
  
     background-color: #F7F7F7;
     padding-top: 28px;
@@ -49,5 +48,44 @@
     @media screen and (min-width: 768px) {
         font-size: 16px;
         line-height: calc(16/18);
+    }
+}
+.footer-icon{
+    width: 16px;
+    height: 16px;
+    -webkit-animation: pulsing 2s infinite;
+    animation: pulsing 2s infinite;
+}
+@-webkit-keyframes pulsing {
+    0% {
+        -webkit-transform: scale(0.5, 0.5);
+        transform: scale(0.5, 0.5)
+    }
+
+    50% {
+        -webkit-transform: scale(1.0, 1.0);
+        transform: scale(1.0, 1.0);
+    }
+
+    100% {
+        -webkit-transform: scale(0.5, 0.5);
+        transform: scale(0.5, 0.5);
+    }
+}
+
+@keyframes pulsing {
+    0% {
+        -webkit-transform: scale(0.5, 0.5);
+        transform: scale(0.5, 0.5)
+    }
+
+    50% {
+        -webkit-transform: scale(1.0, 1.0);
+        transform: scale(1.0, 1.0);
+    }
+
+    100% {
+        -webkit-transform: scale(0.5, 0.5);
+        transform: scale(0.5, 0.5);
     }
 }
