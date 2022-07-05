@@ -1,7 +1,8 @@
 import NewsApiServise from './api-service';
 import handlerPagination from './pagination';
 import toggleModal from './modal-team';
-
+import moviesArray from './index';
+import writeLocalStor from './index'
 const newsApiServise = new NewsApiServise();
 const movies = document.querySelector('.movies-home');
 const spinner = document.querySelector('.sk-circle');
@@ -9,6 +10,8 @@ let genre;
 let currentPage = 1;
 GenreWriteLocalStorage()
 export default function renderTrendMovies(currentPage) {
+  //  localStorage.setItem("moviess", JSON.stringify(moviesArray));
+  //  writeLocalStor()
   spinner.classList.remove('visually-hidden');
   newsApiServise.getTrendMovies(currentPage).then(response => {
     //console.log(response.results);
@@ -22,6 +25,7 @@ const totalResult = response.total_results;
     instance.movePageTo(currentPage);
 
     instance.on('afterMove', event => {
+     
             newsApiServise.page = event.page;
       currentPage = newsApiServise.page;
       renderTrendMovies(currentPage)

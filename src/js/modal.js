@@ -1,5 +1,6 @@
 import NewsApiServise from './/api-service';
-import addWatchedFilmToLocaleStorage from './local-storage';
+//import addWatchedFilmToLocaleStorage from './local-storage';
+import addWatchedFilmToLocaleStorage from './index';
 const newsApiServise = new NewsApiServise();
 
 const moviesContainer = document.querySelector('.movies-home');
@@ -24,7 +25,7 @@ async function onMovieClick(event) {
   addWatchedFilmToLocaleStorage(response);
 }
 
-function renderMovie(response) {
+ function renderMovie(response) {
   const markup = `
    <img class="modal-conteiner-img" src="https://image.tmdb.org/t/p/w500${
      response.poster_path
@@ -68,6 +69,9 @@ function renderMovie(response) {
   `;
   return markup;
 }
+
+const watchBtn = document.querySelector('.card-btn-watched');
+console.log(watchBtn)
 
 function openModal() {
   //  modalContainer.classList.add('is-open');
