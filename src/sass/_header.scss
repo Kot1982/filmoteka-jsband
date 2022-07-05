@@ -1,5 +1,5 @@
 .header{
-    background-color: #FF001B;
+background-color: #b3b1b1;
     position: relative;
 }
 .header-library{
@@ -43,7 +43,7 @@
     }
 }
 .header-home{
-    background-color: #FF001B;
+    
     background-image: url(../images/Header-mobile1x.jpg);
         background-repeat: no-repeat;
         background-position: center;
@@ -150,11 +150,21 @@
 
 .header-input {
     background-color: inherit;
-    width: 394px;
+    width: 280px;
     border-top: none;
     border-left: none;
     border-right: none;
     border-bottom: 0.5px solid #ffffff;
+    color: #FFFFFF;
+    font-weight: 500;
+    outline-style:none;
+    @media screen and (min-width: 768px) {
+        width: 336px;
+        }
+    
+        @media screen and (min-width: 1280px) {
+            width: 394px;
+        }
 }
 
 .input-icon {
@@ -163,11 +173,11 @@
     top: 4px;
 
     @media screen and (min-width: 768px) {
-        left: 535px;
+        left: 505px;
     }
 
     @media screen and (min-width: 1280px) {
-        left: 795px;
+        left: 791px;
     }
 }
 

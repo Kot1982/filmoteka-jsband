@@ -104,11 +104,20 @@
         margin-left: 8px;
 }
 .allert{
+    font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
     color: red;
     display: block;
+    width: 280px;
  position: absolute;
-    text-align: center;
+    
     left: 50%;
-    bottom: 20%;
+    bottom: 14%;
     transform: translate(-50%,-50%);
+    @media screen and (min-width: 768px){
+width: 393px;
+bottom: 17%;
+    }
+         @media screen and (min-width: 1280px) {}
 }

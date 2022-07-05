@@ -9,6 +9,7 @@ import themeChanger from './theme';
 
 
 const newsApiServise = new NewsApiServise();
+const pagination = document.querySelector('.pagination-thumb');
 const movies = document.querySelector('.movies-home');
 const spinner = document.querySelector('.sk-circle');
 const swicher = document.querySelector(".theme-switch__toggle");
@@ -183,9 +184,11 @@ function searchOurMovie(currentPage) {
   movies.innerHTML = newMarkup;
   if (resp.results.length === 0) {
     allertMovie.classList.remove('visually-hidden')
+    pagination.classList.add('visually-hidden')
   }
   else {
-     allertMovie.classList.add('visually-hidden')
+    allertMovie.classList.add('visually-hidden')
+    pagination.classList.remove('visually-hidden')
   }
 
 }
