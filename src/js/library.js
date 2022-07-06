@@ -118,8 +118,11 @@ function onBtnWatchedClick(e) {
 function renderMovies() {
     const movies =JSON.parse( localStorage.getItem("watchedMovies"));
   //console.log(movies)
-    const listMurkup = movies.map(movie => {
-       // console.log(movie)
+    if (movies === null) {
+        return
+    } else {
+      const listMurkup = movies.map(movie => {
+        //console.log(movie)
         const liEl = `<div class="movie-card" data-movieId=${movie.id}>
                  <img class="movie-img" src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="card">
             
@@ -129,22 +132,28 @@ function renderMovies() {
                 .map(genre => genre.name).slice(0, 3).join(', ')} | ${movie.release_date.slice(
     0,
     4,
-  )}</h3>
+  )}<span class="span-rejt">${(movie.vote_average).toFixed(1)}</span></h3>
                      </div>
                  </div>` ;
         return liEl;
     }).join('');
     //console.log(root)
 
-   root.insertAdjacentHTML('beforeend', listMurkup)
+   root.insertAdjacentHTML('beforeend', listMurkup)   
+    }
+   
  
 }
+
 renderMovies();
 renderMoviesQueue()
 function renderMoviesQueue() {
     const moviesQueue =JSON.parse( localStorage.getItem("queuedMovies"));
  // console.log(moviesQueue)
-    const listMurkup = moviesQueue.map(movie => {
+    if (moviesQueue === null) {
+        return
+    } else {
+       const listMurkup = moviesQueue.map(movie => {
         //console.log(movie)
         const liEl = `<div class="movie-card" data-movieId=${movie.id}>
                  <img class="movie-img" src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="card">
@@ -161,9 +170,10 @@ function renderMoviesQueue() {
         return liEl;
     }).join('');
     //console.log(root)
-   rootQueue.insertAdjacentHTML('beforeend', listMurkup)
+   rootQueue.insertAdjacentHTML('beforeend', listMurkup)  
+    }
+   
  
 }
-
 
 
