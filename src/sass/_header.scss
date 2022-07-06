@@ -226,22 +226,32 @@ background-color: #b3b1b1;
 .header-button:not(:last-child) {
     margin-right: 20px;
 }
-.btn:active {
+.active {
 background-color: #FF6B01;
 border-color: #FF6B01;
 
 }
-#root{
-    background-color: #FF6B01;
-}
-#root-queue{
-    background-color: aqua;
-}
+// #root{
+//     background-color: #FF6B01;
+// }
+// #root-queue{
+//     background-color: aqua;
+// }
 .root-show{
     display: block;
 
 }
 .root-height{
-    display: none;
+    //display: none;
+    position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        border: 0;
+        padding: 0;
+        white-space: nowrap;
+        clip-path: inset(100%);
+        clip: rect(0 0 0 0);
+        overflow: hidden;
 }
 

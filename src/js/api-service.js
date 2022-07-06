@@ -15,7 +15,7 @@ export default class NewsApiServise {
       //this.incrementPage();
 
       window.scrollTo(0,0)
-      console.log(response.data);
+      //console.log(response.data);
 
       return response.data;
     });

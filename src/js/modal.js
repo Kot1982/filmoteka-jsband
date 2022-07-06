@@ -11,7 +11,7 @@ export const backdrop = document.querySelector('.backdrop-movie');
 const closeBtn = document.querySelector('.modal-close-btn.close');
 
 const movieLibrary = document.querySelector('.movies');
-console.log(movieLibrary);
+//console.log(movieLibrary);
 movieLibrary.addEventListener('click', onMovieClick);
 
 // moviesContainer.addEventListener('click', onMovieClick);
