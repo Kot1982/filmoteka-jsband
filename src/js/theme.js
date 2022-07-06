@@ -10,7 +10,6 @@ if (!localStorage.getItem("theme")) {
     body.classList.add('light-theme')
     swicher.classList.add('theme-switch__toggle')
     localStorage.setItem('theme', theme.light)
-   
 }
 
 else {

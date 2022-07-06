@@ -1,9 +1,6 @@
+
 import NewsApiServise from './api-service';
 import handlerPagination from './pagination';
-import toggleModal from './modal-team';
-import moviesArray from './index';
-import writeLocalStor from './index'
-
 import debounce from 'lodash.debounce'
 import themeChanger from './theme';
 
@@ -24,6 +21,8 @@ export default function renderTrendMovies(currentPage) {
   //  writeLocalStor()
   spinner.classList.remove('visually-hidden');
   newsApiServise.getTrendMovies(currentPage).then(response => {
+    console.log(111);
+    console.log(response);
      newsApiServise.resetPage()
     //console.log(response.results);
 const totalResult = response.total_results;

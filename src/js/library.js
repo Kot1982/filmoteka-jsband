@@ -6,7 +6,6 @@ console.log(root);
 const rootQueue = document.querySelector("#root-queue"); 
 
 
-
 let watchedFilms = [];
 let queFilms = [];
 
@@ -55,7 +54,7 @@ export default function addWatchedFilmToLocaleStorage(filmData) {
 
 function onBtnWatchedClick(e) {
     try {
-        watchedFilms = [...JSON.parse(localStorage.getItem('watched'))];
+        watchedFilms = [...JSON.parse(localStorage.getItem('watchedMovies'))];
     } catch (error) {
         watchedFilms = [];
     }
@@ -77,7 +76,7 @@ function onBtnWatchedClick(e) {
     
     function onBtnQue(e) {
        try {
-        queFilms = [...JSON.parse(localStorage.getItem('queue'))];
+        queFilms = [...JSON.parse(localStorage.getItem('queuedMovies'))];
     } catch (error) {
         queFilms = [];
         }
@@ -108,11 +107,11 @@ function onBtnWatchedClick(e) {
 // }
 
 //console.log(localStorage.getItem('watched'))
-console.log(JSON.parse(localStorage.getItem("watched")))
-console.log(JSON.parse(localStorage.getItem("queue")))
+console.log(JSON.parse(localStorage.getItem("watchedMovies")))
+console.log(JSON.parse(localStorage.getItem("queuedMovies")))
 
 function renderMovies() {
-    const movies =JSON.parse( localStorage.getItem("watched"));
+    const movies =JSON.parse( localStorage.getItem("watchedMovies"));
   console.log(movies)
     const listMurkup = movies.map(movie => {
         console.log(movie)
@@ -131,13 +130,14 @@ function renderMovies() {
         return liEl;
     }).join('');
     console.log(root)
+
    root.insertAdjacentHTML('beforeend', listMurkup)
  
 }
 renderMovies();
 renderMoviesQueue()
 function renderMoviesQueue() {
-    const moviesQueue =JSON.parse( localStorage.getItem("queue"));
+    const moviesQueue =JSON.parse( localStorage.getItem("queuedMovies"));
   console.log(moviesQueue)
     const listMurkup = moviesQueue.map(movie => {
         console.log(movie)
