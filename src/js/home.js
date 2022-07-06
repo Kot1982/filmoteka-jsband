@@ -21,8 +21,8 @@ export default function renderTrendMovies(currentPage) {
   //  writeLocalStor()
   spinner.classList.remove('visually-hidden');
   newsApiServise.getTrendMovies(currentPage).then(response => {
-    console.log(111);
-    console.log(response);
+   // console.log(111);
+   // console.log(response);
      newsApiServise.resetPage()
     //console.log(response.results);
 const totalResult = response.total_results;
