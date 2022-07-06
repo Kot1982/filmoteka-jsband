@@ -1,4 +1,4 @@
-
+import themeChanger from './theme';
 // import NewsApiServise from './api-service';
 // export let moviesArray = [];
  const root = document.querySelector("#root");
@@ -8,10 +8,11 @@ const watched = document.querySelector('.lib-watched-btn');
 watched.addEventListener('click', onBtnWatchedShow)
 const queue = document.querySelector('.lib-queue-btn');
 queue.addEventListener('click', onBtnShowQueue)
+const swicher = document.querySelector(".theme-switch__toggle");
 
 let watchedFilms = [];
 let queFilms = [];
-
+swicher.addEventListener('change', themeChanger);
 //console.log(watchedFilms);
 //console.log(queFilms)
 
