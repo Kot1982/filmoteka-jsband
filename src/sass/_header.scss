@@ -9,7 +9,7 @@ background-color: #b3b1b1;
     background-size: cover;
     margin-right: auto;
     margin-left: auto;
-    max-width: 1280px;
+    //max-width: 1280px;
     padding-top: 40px;
     padding-bottom: 62px;
 
@@ -33,7 +33,7 @@ background-color: #b3b1b1;
 
     @media screen and (min-width: 1200px) {
         background-image: url(../images/Librery-desc1x.jpg);
-        max-width: 1280px;
+        //max-width: 1280px;
 
         @media (min-device-pixel-ratio: 2),
         (min-resolution: 192dpi),

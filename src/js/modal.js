@@ -24,7 +24,7 @@ async function onMovieClick(event) {
   // event.preventDefault()
   const movieCard = event.target.closest('.movie-card');
   const movieId = movieCard.dataset.movieid;
-  console.log(movieId);
+ // console.log(movieId);
   selectedMovieResponse = await newsApiServise.getMovieInfo(movieId);
 
   modalContainer.innerHTML = renderMovie();
@@ -130,7 +130,7 @@ function onLocalStorageWatched(event) {
 
   const watchedMovies = localStorage.getItem('watchedMovies');
   const watchedMoviesArray = JSON.parse(watchedMovies) || [];
-  console.log(watchedMoviesArray);
+  //console.log(watchedMoviesArray);
   if (watchedMoviesArray.some(movie => movie.id === selectedMovieResponse.id)) {
     const movieIndex = watchedMoviesArray.findIndex(
       movie => movie.id === selectedMovieResponse.id
@@ -147,7 +147,7 @@ function onLocalStorageWatched(event) {
     // );
   }
   localStorage.setItem('watchedMovies', JSON.stringify(watchedMoviesArray));
-  console.log(watchedMoviesArray);
+ // console.log(watchedMoviesArray);
 }
 
 function onLocalStorageQue(event) {
@@ -168,7 +168,7 @@ function onLocalStorageQue(event) {
     
   }
   localStorage.setItem('queuedMovies', JSON.stringify(queuedMoviesArray));
-  console.log(queuedMoviesArray);
+  //console.log(queuedMoviesArray);
 }
 
 // async function onMovieLibraryClick(event) {
