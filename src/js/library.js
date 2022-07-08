@@ -1,8 +1,7 @@
 import themeChanger from './theme';
-// import NewsApiServise from './api-service';
-// export let moviesArray = [];
+import { renderMovies, renderMoviesQueue } from './render-movies';
+
  const root = document.querySelector("#root");
-//console.log(root);
 const rootQueue = document.querySelector("#root-queue"); 
 const watched = document.querySelector('.lib-watched-btn');
 watched.addEventListener('click', onBtnWatchedShow)
@@ -13,13 +12,10 @@ const swicher = document.querySelector(".theme-switch__toggle");
 let watchedFilms = [];
 let queFilms = [];
 swicher.addEventListener('change', themeChanger);
-//console.log(watchedFilms);
-//console.log(queFilms)
 
 
 function onBtnWatchedShow() {
     onWatchedBtnClick()
-    //onWatchedBtnClick()
     if (root.classList.contains('root-height') && rootQueue.classList.contains('root-show')) {
         root.classList.remove('root-height');
         root.classList.add('root-show');
@@ -107,74 +103,12 @@ function onBtnWatchedClick(e) {
          queFilms.push(filmData);
     localStorage.setItem('queue', JSON.stringify( queFilms));
 }
-
-
-
 }
 
+console.log(JSON.parse(localStorage.getItem("watchedMovies")))
+console.log(JSON.parse(localStorage.getItem("queuedMovies")))
 
-//console.log(JSON.parse(localStorage.getItem("watchedMovies")))
-//console.log(JSON.parse(localStorage.getItem("queuedMovies")))
 
-function renderMovies() {
-    const movies =JSON.parse( localStorage.getItem("watchedMovies"));
-  //console.log(movies)
-    if (movies === null) {
-        return
-    } else {
-      const listMurkup = movies.map(movie => {
-        //console.log(movie)
-        const liEl = `<div class="movie-card" data-movieId=${movie.id}>
-                 <img class="movie-img" src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="card">
-            
-                 <div class="movie-info">
-                     <h2 class="movie-title">${movie.original_title}</h2>
-                    <h3 class="span-title">${movie.genres
-                .map(genre => genre.name).slice(0, 3).join(', ')} | ${movie.release_date.slice(
-    0,
-    4,
-  )}<span class="span-rejt">${(movie.vote_average).toFixed(1)}</span></h3>
-                     </div>
-                 </div>` ;
-        return liEl;
-    }).join('');
-    //console.log(root)
-
-   root.insertAdjacentHTML('beforeend', listMurkup)   
-    }
-   
- 
-}
-
-renderMovies();
-renderMoviesQueue()
-function renderMoviesQueue() {
-    const moviesQueue =JSON.parse( localStorage.getItem("queuedMovies"));
- // console.log(moviesQueue)
-    if (moviesQueue === null) {
-        return
-    } else {
-       const listMurkup = moviesQueue.map(movie => {
-        //console.log(movie)
-        const liEl = `<div class="movie-card" data-movieId=${movie.id}>
-                 <img class="movie-img" src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="card">
-            
-                 <div class="movie-info">
-                     <h2 class="movie-title">${movie.original_title}</h2>
-                    <h3 class="span-title">${movie.genres
-                .map(genre => genre.name).slice(0, 3).join(', ')} | ${movie.release_date.slice(
-    0,
-    4,
-  )}</h3>
-                     </div>
-                 </div>` ;
-        return liEl;
-    }).join('');
-    //console.log(root)
-   rootQueue.insertAdjacentHTML('beforeend', listMurkup)  
-    }
-   
- 
-}
-
+renderMovies(root);
+renderMoviesQueue(rootQueue);
 

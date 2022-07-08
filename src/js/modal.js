@@ -1,7 +1,10 @@
 import NewsApiServise from './/api-service';
-//import addWatchedFilmToLocaleStorage from './local-storage';
-// import addWatchedFilmToLocaleStorage from './index';
+import { renderMovies, renderMoviesQueue } from './render-movies';
+
+
 const newsApiServise = new NewsApiServise();
+
+
 
 let selectedMovieResponse = null;
 
@@ -10,21 +13,23 @@ const modalContainer = document.querySelector('.modal-conteiner');
 export const backdrop = document.querySelector('.backdrop-movie');
 const closeBtn = document.querySelector('.modal-close-btn.close');
 
+
+const root = document.querySelector("#root");
+const rootQueue = document.querySelector("#root-queue"); 
+
 const movieLibrary = document.querySelector('.movies');
-//console.log(movieLibrary);
 movieLibrary.addEventListener('click', onMovieClick);
 
-// moviesContainer.addEventListener('click', onMovieClick);
+
 if (moviesContainer) {
   moviesContainer.addEventListener('click', onMovieClick);
 }
 closeBtn.addEventListener('click', onCloseModal);
 
 async function onMovieClick(event) {
-  // event.preventDefault()
   const movieCard = event.target.closest('.movie-card');
   const movieId = movieCard.dataset.movieid;
- // console.log(movieId);
+
   selectedMovieResponse = await newsApiServise.getMovieInfo(movieId);
 
   modalContainer.innerHTML = renderMovie();
@@ -34,7 +39,6 @@ async function onMovieClick(event) {
   watched.addEventListener('click', onLocalStorageWatched);
   const que = document.querySelector('.card-btn-que');
   que.addEventListener('click', onLocalStorageQue);
-  // addWatchedFilmToLocaleStorage(response);
 }
 
 function renderMovie() {
@@ -106,14 +110,11 @@ function renderMovie() {
 }
 
 function openModal() {
-  //  modalContainer.classList.add('is-open');
   backdrop.classList.add('is-open');
   backdrop.classList.remove('is-hidden');
-  // document.overflow = 'hidden';
 }
 
 export function onCloseModal() {
-  // modalContainer.classList.remove('is-open');
   backdrop.classList.remove('is-open');
   backdrop.classList.add('is-hidden');
 }
@@ -122,15 +123,16 @@ export function onCloseModal() {
 
 const buttonLabelWatchedAdd = 'add to Watched';
 const buttonLabelWatchedRemove = 'remove from Watched';
+console.log(buttonLabelWatchedRemove);
 const buttonLabelQueuedAdd = 'add to Queue';
 const buttonLabelQueueRemove = 'remove from Queue';
 
 function onLocalStorageWatched(event) {
   const watchedButton = event.target;
 
+
   const watchedMovies = localStorage.getItem('watchedMovies');
   const watchedMoviesArray = JSON.parse(watchedMovies) || [];
-  //console.log(watchedMoviesArray);
   if (watchedMoviesArray.some(movie => movie.id === selectedMovieResponse.id)) {
     const movieIndex = watchedMoviesArray.findIndex(
       movie => movie.id === selectedMovieResponse.id
@@ -141,20 +143,15 @@ function onLocalStorageWatched(event) {
   } else {
     watchedMoviesArray.push(selectedMovieResponse);
     watchedButton.innerText = buttonLabelWatchedRemove;
-    // watchedButton.classList.replace(
-    //   'card-btn-watched',
-    //   'card-btn-remove-watched'
-    // );
   }
   localStorage.setItem('watchedMovies', JSON.stringify(watchedMoviesArray));
- // console.log(watchedMoviesArray);
+ renderMovies(root)
 }
 
 function onLocalStorageQue(event) {
   const queuedButton = event.target;
   const queuedMovies = localStorage.getItem('queuedMovies');
   const queuedMoviesArray = JSON.parse(queuedMovies) || [];
-  // console.log(queuedMoviesArray);
   if (queuedMoviesArray.some(movie => movie.id === selectedMovieResponse.id)) {
     const movieIndex = queuedMoviesArray.findIndex(
       movie => movie.id === selectedMovieResponse.id
@@ -168,13 +165,5 @@ function onLocalStorageQue(event) {
     
   }
   localStorage.setItem('queuedMovies', JSON.stringify(queuedMoviesArray));
-  //console.log(queuedMoviesArray);
+  renderMoviesQueue(rootQueue)
 }
-
-// async function onMovieLibraryClick(event) {
-//   const movieLibraryCard = event.target.closest('.movie-library-card');
-//   const movieLibraryId = movieLibraryCard.dataset.movieid;
-//   console.log(movieLibraryId);
-//   const response = await newsApiServise.getMovieInfo(movieLibraryId);
-//   console.log(response);
-// }
