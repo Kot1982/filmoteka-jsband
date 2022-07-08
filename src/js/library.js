@@ -114,7 +114,7 @@ function onBtnWatchedClick(e) {
 
 
 
-function renderMovies() {
+function renderMovies(){
     const movies =JSON.parse( localStorage.getItem("watchedMovies"));
   
     if (movies === null) {
