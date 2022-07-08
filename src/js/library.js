@@ -1,7 +1,13 @@
 import themeChanger from './theme';
+<<<<<<< HEAD
 
  const root = document.querySelector("#root");
 
+=======
+import { renderMovies, renderMoviesQueue } from './render-movies';
+
+ const root = document.querySelector("#root");
+>>>>>>> main
 const rootQueue = document.querySelector("#root-queue"); 
 const watched = document.querySelector('.lib-watched-btn');
 watched.addEventListener('click', onBtnWatchedShow)
@@ -12,12 +18,18 @@ const swicher = document.querySelector(".theme-switch__toggle");
 let watchedFilms = [];
 let queFilms = [];
 swicher.addEventListener('change', themeChanger);
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 
 
 function onBtnWatchedShow() {
     onWatchedBtnClick()
+<<<<<<< HEAD
     
+=======
+>>>>>>> main
     if (root.classList.contains('root-height') && rootQueue.classList.contains('root-show')) {
         root.classList.remove('root-height');
         root.classList.add('root-show');
@@ -107,6 +119,7 @@ function onBtnWatchedClick(e) {
 
 
 
+
 function renderMovies() {
     const movies =JSON.parse( localStorage.getItem("watchedMovies"));
   
@@ -184,4 +197,8 @@ function renderMoviesQueue() {
  
 }
 
+
+
+renderMovies(root);
+renderMoviesQueue(rootQueue);
 

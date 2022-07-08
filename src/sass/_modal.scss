@@ -299,7 +299,7 @@ br {
   font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 11.5px;
   line-height: 1.33;
   display: flex;
   align-items: center;
@@ -316,6 +316,7 @@ br {
   margin-bottom: 0;
   width: 110px;
   height: 44px;
+
   @media (min-width: 768px) {
     padding: 14px 10px;
     width: 125px;
@@ -334,8 +335,7 @@ br {
   background-color: #ff6b01;
   border: none;
   outline: none;
-  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1) background-color 250ms
-    cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
   margin-right: 15px;
   margin-bottom: 0;
 }
