@@ -122,6 +122,7 @@ function searchOurMovie(currentPage) {
   if (ourMovie === "") {
      errorImg.classList.add('visually-hidden')
     allertMovie.classList.add('visually-hidden')
+     pagination.classList.remove('visually-hidden')
     return renderTrendMovies(currentPage);
    
   }
