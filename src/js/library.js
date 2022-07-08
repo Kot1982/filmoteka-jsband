@@ -1,7 +1,13 @@
 import themeChanger from './theme';
+<<<<<<< HEAD
+
+ const root = document.querySelector("#root");
+
+=======
 import { renderMovies, renderMoviesQueue } from './render-movies';
 
  const root = document.querySelector("#root");
+>>>>>>> main
 const rootQueue = document.querySelector("#root-queue"); 
 const watched = document.querySelector('.lib-watched-btn');
 watched.addEventListener('click', onBtnWatchedShow)
@@ -12,10 +18,18 @@ const swicher = document.querySelector(".theme-switch__toggle");
 let watchedFilms = [];
 let queFilms = [];
 swicher.addEventListener('change', themeChanger);
+<<<<<<< HEAD
+
+=======
+>>>>>>> main
 
 
 function onBtnWatchedShow() {
     onWatchedBtnClick()
+<<<<<<< HEAD
+    
+=======
+>>>>>>> main
     if (root.classList.contains('root-height') && rootQueue.classList.contains('root-show')) {
         root.classList.remove('root-height');
         root.classList.add('root-show');
@@ -60,7 +74,7 @@ export default function addWatchedFilmToLocaleStorage(filmData) {
     btnQueue.addEventListener('click', onBtnQue);
     
     btnWatched.addEventListener('click', onBtnWatchedClick);
- //console.log(btnQueue)
+
 
 function onBtnWatchedClick(e) {
     try {
@@ -70,12 +84,11 @@ function onBtnWatchedClick(e) {
     }
 
     for (const film of watchedFilms) {
-        //console.log(filmData.id);
-        //console.log(film.id)
+        
         if (filmData.id === film.id) {
             const filteredFilm = watchedFilms.filter(film => film.id !== filmData.id);
             watchedFilms = [...filteredFilm];
-            //console.log(watchedFilms)
+         
             localStorage.setItem('watched', JSON.stringify(watchedFilms));
             return;
         }
@@ -91,8 +104,6 @@ function onBtnWatchedClick(e) {
         queFilms = [];
         }
         for (const film of queFilms) {
-        //console.log(filmData.id);
-        //console.log(film.id)
         if (filmData.id === film.id) {
             const filteredFilm = queFilms.filter(film => film.id !== filmData.id);
             queFilms = [...filteredFilm];
@@ -105,8 +116,87 @@ function onBtnWatchedClick(e) {
 }
 }
 
-console.log(JSON.parse(localStorage.getItem("watchedMovies")))
-console.log(JSON.parse(localStorage.getItem("queuedMovies")))
+
+
+
+
+function renderMovies() {
+    const movies =JSON.parse( localStorage.getItem("watchedMovies"));
+  
+    if (movies === null) {
+        return
+    } else {
+      const listMurkup = movies.map(movie => {
+          getGenreNames(movie.genres)
+        const liEl = `<div class="movie-card" data-movieId=${movie.id}>
+                 <img class="movie-img" src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="card">
+            
+                 <div class="movie-info">
+                     <h2 class="movie-title">${movie.original_title}</h2>
+                    <h3 class="span-title">${(genreArray).join(',  ')} | ${movie.release_date.slice(
+    0,
+    4,
+  )}<span class="span-rejt">${(movie.vote_average).toFixed(1)}</span></h3>
+                     </div>
+                 </div>` ;
+        return liEl;
+    }).join('');
+   
+
+   root.insertAdjacentHTML('beforeend', listMurkup)   
+    }
+   
+ 
+}
+   let genreArray = [];
+function getGenreNames(genres) {
+ 
+    genres.map(el => {
+       
+        genreArray.push(el.name)
+        
+        if (genreArray.length === 2 || genreArray.length === 1) {
+           genreArray 
+        } if (genreArray.length >= 3) {
+             genreArray.splice(2, 3, 'Other')
+        } if (genreArray.length === 0) {
+             genreArray.push('No genres')
+        }
+    })
+   
+}
+
+renderMovies();
+renderMoviesQueue()
+function renderMoviesQueue() {
+    const moviesQueue =JSON.parse( localStorage.getItem("queuedMovies"));
+ 
+    if (moviesQueue === null) {
+        return
+    } else {
+       const listMurkup = moviesQueue.map(movie => {
+        
+             getGenreNames(movie.genres)
+        const liEl = `<div class="movie-card" data-movieId=${movie.id}>
+                 <img class="movie-img" src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="card">
+            
+                 <div class="movie-info">
+                     <h2 class="movie-title">${movie.original_title}</h2>
+                     <h3 class="span-title">${(genreArray).join(',  ')} | ${movie.release_date.slice(
+    0,
+    4,
+  )}<span class="span-rejt">${(movie.vote_average).toFixed(1)}</span></h3>
+                     </div>
+                 </div>` ;
+        return liEl;
+    }).join('');
+    
+   rootQueue.insertAdjacentHTML('beforeend', listMurkup)  
+    }
+   
+ 
+}
+
 
 
 renderMovies(root);
