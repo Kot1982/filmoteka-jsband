@@ -44,16 +44,15 @@ const totalResult = response.total_results;
    
     const markup = response.results
       .map(({ poster_path, original_title, release_date, genre_ids, vote_average, id }) => {
-         getGenreName(genre_ids)
+        console.log(release_date)
+        dateRelise(release_date);
+        getGenreName(genre_ids)
         return `<div class="movie-card" data-movieId=${id}>
                  <img class="movie-img" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="card">
             
                  <div class="movie-info">
                      <h2 class="movie-title">${original_title}</h2>
-                    <h3 class="span-title">${(genre).join(',  ')} | ${release_date.slice(
-    0,
-    4,
-  )}</h3>
+                    <h3 class="span-title">${(genre).join(',  ')} | ${dataRender}</h3>
                      </div>
                  </div>`;
       })
@@ -65,6 +64,20 @@ const totalResult = response.total_results;
     
   });
 }
+
+let dataRender = '';
+//dateRelise(undefined)
+function dateRelise(relase) {
+    if (relase === undefined) {
+       return
+    } else {
+      dataRender =  relase.slice(
+            0,
+            4) 
+    
+}
+}
+console.log(dataRender)
 
      renderTrendMovies(currentPage);
 
