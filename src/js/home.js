@@ -12,6 +12,7 @@ const spinner = document.querySelector('.sk-circle');
 const swicher = document.querySelector(".theme-switch__toggle");
 const mainInput = document.querySelector(".header-input");
 const allertMovie = document.querySelector(".allert"); 
+const errorImg = document.querySelector(".error_box"); 
 let genre;
 let currentPage = 1;
 swicher.addEventListener('change', themeChanger);
@@ -150,7 +151,7 @@ function searchOurMovie(currentPage) {
   .map(
     ({ poster_path, original_title, release_date, genre_ids, id, src = poster_path === null ?'https://d2j1wkp1bavyfs.cloudfront.net/legacy/assets/mf-no-poster-available-v2.png' : `https://image.tmdb.org/t/p/w500${poster_path}` }) => {
         getGenreName(genre_ids)
-       
+       console.log(release_date)
         return `<div class="movie-card" data-movieId=${id}>
                  <img class="movie-img" src="${src}" alt="card">
             
@@ -163,17 +164,20 @@ function searchOurMovie(currentPage) {
     .join('');
 
   movies.innerHTML = newMarkup;
-  if (resp.results.length === 0) {
+   if (resp.results.length === 0) {
+    
     allertMovie.classList.remove('visually-hidden')
-    pagination.classList.add('visually-hidden')
+     pagination.classList.add('visually-hidden')
+     errorImg.classList.remove('visually-hidden')
   }
   else {
     allertMovie.classList.add('visually-hidden')
-    pagination.classList.remove('visually-hidden')
+     pagination.classList.remove('visually-hidden')
+     errorImg.classList.add('visually-hidden')
   }
 
 }
 
 
-mainInput.addEventListener('input', debounce(searchOurMovie, 300))
+mainInput.addEventListener('input', debounce(searchOurMovie, 600))
 
