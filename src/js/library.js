@@ -1,10 +1,9 @@
 import themeChanger from './theme';
-
-
- const root = document.querySelector("#root");
-
-
 import { renderMovies, renderMoviesQueue } from './render-movies';
+const root = document.querySelector("#root");
+
+
+
 
 
 
@@ -112,84 +111,6 @@ function onBtnWatchedClick(e) {
 
 
 
-
-
-function renderMovies(){
-    const movies =JSON.parse( localStorage.getItem("watchedMovies"));
-  
-    if (movies === null) {
-        return
-    } else {
-      const listMurkup = movies.map(movie => {
-          getGenreNames(movie.genres)
-        const liEl = `<div class="movie-card" data-movieId=${movie.id}>
-                 <img class="movie-img" src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="card">
-            
-                 <div class="movie-info">
-                     <h2 class="movie-title">${movie.original_title}</h2>
-                    <h3 class="span-title">${(genreArray).join(',  ')} | ${movie.release_date.slice(
-    0,
-    4,
-  )}<span class="span-rejt">${(movie.vote_average).toFixed(1)}</span></h3>
-                     </div>
-                 </div>` ;
-        return liEl;
-    }).join('');
-   
-
-   root.insertAdjacentHTML('beforeend', listMurkup)   
-    }
-   
- 
-}
-   let genreArray = [];
-function getGenreNames(genres) {
- 
-    genres.map(el => {
-       
-        genreArray.push(el.name)
-        
-        if (genreArray.length === 2 || genreArray.length === 1) {
-           genreArray 
-        } if (genreArray.length >= 3) {
-             genreArray.splice(2, 3, 'Other')
-        } if (genreArray.length === 0) {
-             genreArray.push('No genres')
-        }
-    })
-   
-}
-
-renderMovies();
-renderMoviesQueue()
-function renderMoviesQueue() {
-    const moviesQueue =JSON.parse( localStorage.getItem("queuedMovies"));
- 
-    if (moviesQueue === null) {
-        return
-    } else {
-       const listMurkup = moviesQueue.map(movie => {
-        
-             getGenreNames(movie.genres)
-        const liEl = `<div class="movie-card" data-movieId=${movie.id}>
-                 <img class="movie-img" src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="card">
-            
-                 <div class="movie-info">
-                     <h2 class="movie-title">${movie.original_title}</h2>
-                     <h3 class="span-title">${(genreArray).join(',  ')} | ${movie.release_date.slice(
-    0,
-    4,
-  )}<span class="span-rejt">${(movie.vote_average).toFixed(1)}</span></h3>
-                     </div>
-                 </div>` ;
-        return liEl;
-    }).join('');
-    
-   rootQueue.insertAdjacentHTML('beforeend', listMurkup)  
-    }
-   
- 
-}
 
 
 
