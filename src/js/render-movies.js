@@ -1,13 +1,13 @@
-const errorImg = document.querySelector(".error_box"); 
+ 
 import jakeGif from '../images/error.jpg';
 export function renderMovies(root) {
     const movies =JSON.parse( localStorage.getItem("watchedMovies"));
-  //console.log(movies)
+
     if (movies === null || root === null) {
         return
     } else {
       const listMurkup = movies.map(movie => {
-        //console.log(movie)
+       
           getGenreNames(movie.genres)
         const liEl = `<div class="movie-card" data-movieId=${movie.id}>
                  <img class="movie-img" src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="card">
@@ -22,9 +22,9 @@ export function renderMovies(root) {
                  </div>` ;
         return liEl;
     }).join('');
-    //console.log(root)
+    
         root.innerHTML = listMurkup;  
-        console.log(listMurkup.length)
+       
          if (listMurkup.length === 0) {
              root.innerHTML = '';
              renderFillerWatch();
@@ -47,13 +47,12 @@ function renderFillerWatch() {
 
 export function renderMoviesQueue(rootQueue) {
     const moviesQueue =JSON.parse( localStorage.getItem("queuedMovies"));
- // console.log(moviesQueue)
+ 
     if (moviesQueue === null || rootQueue === null) {
         return
     } else {
        const listMurkup = moviesQueue.map(movie => {
-       //dateRelise(movie.release_date)
-          // console.log('1', dataRender)
+     
            getGenreNames(movie.genres)
         const liEl = `<div class="movie-card" data-movieId=${movie.id}>
                  <img class="movie-img" src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="card">
@@ -68,7 +67,7 @@ export function renderMoviesQueue(rootQueue) {
                  </div>` ;
         return liEl;
     }).join('');
-    console.log('1,', listMurkup.length)
+   
         rootQueue.innerHTML = listMurkup;
           if (listMurkup.length === 0) {
              rootQueue.innerHTML = '';
@@ -92,16 +91,3 @@ function getGenreNames(genres) {
     })
 }
 
-// let dataRender = '';
-// //dateRelise(undefined)
-// function dateRelise(relase) {
-//     if (relase === undefined) {
-//         dataRender = 'no year';
-//     } else {
-//       dataRender =  relase.slice(
-//             0,
-//             4) 
-    
-// }
-// }
-// console.log(dataRender)
