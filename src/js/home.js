@@ -120,7 +120,10 @@ function searchOurMovie(currentPage) {
  
   const ourMovie = mainInput.value
   if (ourMovie === "") {
+     errorImg.classList.add('visually-hidden')
+    allertMovie.classList.add('visually-hidden')
     return renderTrendMovies(currentPage);
+   
   }
  
   spinner.classList.remove('visually-hidden');
