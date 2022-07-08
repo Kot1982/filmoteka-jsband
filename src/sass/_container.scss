@@ -18,3 +18,19 @@
         width: 1280px;
     }
 }
+.header>.container{
+    position: relative;
+}
+
+.error_box{
+    display: flex;
+margin: 0 auto;
+justify-content: center;
+overflow: hidden;
+border-radius: 20px;
+}
+.error_img {
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+}
