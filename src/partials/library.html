@@ -1,30 +1,39 @@
 <header class="header header-library">
-  
   <div class="container">
     <div class="toolbar">
       <div class="theme-switch">
         <svg class="theme-switch__icon" role="img" aria-label="Иконка солнца">
           <use href="./images/symbol-defs.svg#icon-sun"></use>
         </svg>
-    
+
         <div class="theme-switch__control">
-          <input class="theme-switch__toggle" type="checkbox" name="theme" id="theme-switch-toggle"
-            aria-label="Переключить между тёмной и светлой темой" />
-          <label aria-hidden="true" class="theme-switch__track" for="theme-switch-toggle">
+          <input
+            class="theme-switch__toggle"
+            type="checkbox"
+            name="theme"
+            id="theme-switch-toggle"
+            aria-label="Переключить между тёмной и светлой темой"
+          />
+          <label
+            aria-hidden="true"
+            class="theme-switch__track"
+            for="theme-switch-toggle"
+          >
           </label>
           <div aria-hidden="true" class="theme-switch__marker"></div>
         </div>
-    
+
         <svg class="theme-switch__icon" aria-label="Иконка луны">
           <use href="./images/symbol-defs.svg#icon-moon"></use>
         </svg>
       </div>
     </div>
     <nav class="header-content nav-library">
-      <a href="./index.html" class="header-logo">
+      <a href="./index.html" class="header-logo animate__animated animate__bounce">
         <svg class="logo-icon" width="24" height="24">
-          <use href="./images/symbol-defs.svg#icon-logo"></use></svg>
-          <span class="span-header"> Filmoteka</span>
+          <use href="./images/symbol-defs.svg#icon-logo"></use>
+        </svg>
+        <span class="span-header"> Filmoteka</span>
       </a>
 
       <ul class="right-side list">
@@ -40,7 +49,9 @@
     </nav>
     <ul class="list header-buttons">
       <li class="header-button">
-        <button type="button" class="btn active lib-watched-btn">WATCHED</button>
+        <button type="button" class="btn active lib-watched-btn">
+          WATCHED
+        </button>
       </li>
       <li class="header-button">
         <button type="button" class="btn lib-queue-btn">QUEUE</button>
@@ -52,10 +63,8 @@
 <section class="about">
   <h1 class="visually-hidden">title</h1>
   <div class="container">
-   
     <div class="movies">
       <div class="root-show movies-grid" id="root">
-       
         <!-- <div class="movie-card">
                  <img class="movie-img" src="./images/Rectangle 5.jpg" alt="card">
             
@@ -65,10 +74,7 @@
                      </div>
                  </div> -->
       </div>
-      <div class="root-height movies-grid" id="root-queue">
-       
-      </div>
-
+      <div class="root-height movies-grid" id="root-queue"></div>
     </div>
   </div>
 </section>
