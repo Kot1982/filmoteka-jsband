@@ -1,10 +1,7 @@
 import NewsApiServise from './/api-service';
 import { renderMovies, renderMoviesQueue } from './render-movies';
 
-
 const newsApiServise = new NewsApiServise();
-
-
 
 let selectedMovieResponse = null;
 
@@ -13,13 +10,11 @@ const modalContainer = document.querySelector('.modal-conteiner');
 export const backdrop = document.querySelector('.backdrop-movie');
 const closeBtn = document.querySelector('.modal-close-btn.close');
 
-
-const root = document.querySelector("#root");
-const rootQueue = document.querySelector("#root-queue"); 
+const root = document.querySelector('#root');
+const rootQueue = document.querySelector('#root-queue');
 
 const movieLibrary = document.querySelector('.movies');
 movieLibrary.addEventListener('click', onMovieClick);
-
 
 if (moviesContainer) {
   moviesContainer.addEventListener('click', onMovieClick);
@@ -44,12 +39,15 @@ async function onMovieClick(event) {
 function renderMovie() {
   const queuedMovies = localStorage.getItem('queuedMovies');
   const queuedMoviesArray = JSON.parse(queuedMovies) || [];
-  const isMovieQueued = queuedMoviesArray.some(movie => movie.id === selectedMovieResponse.id
+  const isMovieQueued = queuedMoviesArray.some(
+    movie => movie.id === selectedMovieResponse.id
   );
 
   const watchedMovies = localStorage.getItem('watchedMovies');
   const watchedMoviesArray = JSON.parse(watchedMovies) || [];
-  const isMovieWatched = watchedMoviesArray.some(movie => movie.id === selectedMovieResponse.id);
+  const isMovieWatched = watchedMoviesArray.some(
+    movie => movie.id === selectedMovieResponse.id
+  );
 
   const markup = `
    <img class="modal-conteiner-img" src="https://image.tmdb.org/t/p/w500${
@@ -123,13 +121,12 @@ export function onCloseModal() {
 
 const buttonLabelWatchedAdd = 'add to Watched';
 const buttonLabelWatchedRemove = 'remove from Watched';
-console.log(buttonLabelWatchedRemove);
+
 const buttonLabelQueuedAdd = 'add to Queue';
 const buttonLabelQueueRemove = 'remove from Queue';
 
 function onLocalStorageWatched(event) {
   const watchedButton = event.target;
-
 
   const watchedMovies = localStorage.getItem('watchedMovies');
   const watchedMoviesArray = JSON.parse(watchedMovies) || [];
@@ -145,7 +142,7 @@ function onLocalStorageWatched(event) {
     watchedButton.innerText = buttonLabelWatchedRemove;
   }
   localStorage.setItem('watchedMovies', JSON.stringify(watchedMoviesArray));
- renderMovies(root)
+  renderMovies(root);
 }
 
 function onLocalStorageQue(event) {
@@ -162,8 +159,7 @@ function onLocalStorageQue(event) {
   } else {
     queuedMoviesArray.push(selectedMovieResponse);
     queuedButton.innerText = buttonLabelQueueRemove;
-    
   }
   localStorage.setItem('queuedMovies', JSON.stringify(queuedMoviesArray));
-  renderMoviesQueue(rootQueue)
+  renderMoviesQueue(rootQueue);
 }

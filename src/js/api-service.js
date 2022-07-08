@@ -6,7 +6,6 @@ export default class NewsApiServise {
     this.searchQuery = '';
     this.page = 1;
     this.allGenres = [];
-
   }
   async getTrendMovies() {
     return await Axios.get(
@@ -14,7 +13,7 @@ export default class NewsApiServise {
     ).then(response => {
       //this.incrementPage();
 
-      window.scrollTo(0,0)
+      window.scrollTo(0, 0);
       //console.log(response.data);
 
       return response.data;
@@ -23,9 +22,9 @@ export default class NewsApiServise {
 
   getGenres() {
     return Axios.get(
-      `${url}genre/movie/list?api_key=${key}&language=en-US`,
+      `${url}genre/movie/list?api_key=${key}&language=en-US`
     ).then(response => {
-      return response.data.genres
+      return response.data.genres;
     });
   }
 
@@ -45,11 +44,11 @@ export default class NewsApiServise {
       return response.data;
     });
   }
-async searchMovie(movie) {
+  async searchMovie(movie) {
     return await Axios.get(
       `${url}search/movie?api_key=${key}&query=${movie}&page=${this.page}`
     ).then(response => {
-      window.scrollTo(0, 0)
+      window.scrollTo(0, 0);
       return response.data;
     });
   }
@@ -63,7 +62,6 @@ async searchMovie(movie) {
   //     console.log(this.allGenres);
   //   });
   // }
- 
 
   incrementPage() {
     this.page += 1;
@@ -81,4 +79,3 @@ async searchMovie(movie) {
     this.searchQuery = newQuery;
   }
 }
-
