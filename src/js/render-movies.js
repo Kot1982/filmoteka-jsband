@@ -9,9 +9,9 @@ export function renderMovies(root) {
       .map(movie => {
         getGenreNames(movie.genres);
         const liEl = `<div class="movie-card" data-movieId=${movie.id}>
-                 <img class="movie-img" src="https://image.tmdb.org/t/p/w500${
-                   movie.poster_path
-                 }" alt="card">
+                 <img class="movie-img" src="${
+                  movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'https://d2j1wkp1bavyfs.cloudfront.net/legacy/assets/mf-no-poster-available-v2.png'
+                }" alt="card">
             
                  <div class="movie-info">
                      <h2 class="movie-title">${movie.original_title}</h2>
@@ -54,9 +54,9 @@ export function renderMoviesQueue(rootQueue) {
       .map(movie => {
         getGenreNames(movie.genres);
         const liEl = `<div class="movie-card" data-movieId=${movie.id}>
-                 <img class="movie-img" src="https://image.tmdb.org/t/p/w500${
-                   movie.poster_path
-                 }" alt="card">
+                 <img class="movie-img" src="${
+                  movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'https://d2j1wkp1bavyfs.cloudfront.net/legacy/assets/mf-no-poster-available-v2.png'
+                }" alt="card">
             
                  <div class="movie-info">
                      <h2 class="movie-title">${movie.original_title}</h2>
