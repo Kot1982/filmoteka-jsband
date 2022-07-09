@@ -51,7 +51,9 @@ function renderMovie() {
 
   const markup = `
    <img class="modal-conteiner-img" src="${
-     selectedMovieResponse.poster_path ? `https://image.tmdb.org/t/p/w500${selectedMovieResponse.poster_path}` : 'https://d2j1wkp1bavyfs.cloudfront.net/legacy/assets/mf-no-poster-available-v2.png'
+     selectedMovieResponse.poster_path
+       ? `https://image.tmdb.org/t/p/w500${selectedMovieResponse.poster_path}`
+       : 'https://d2j1wkp1bavyfs.cloudfront.net/legacy/assets/mf-no-poster-available-v2.png'
    }" alt="card">
   <div class='card-container'>
           <h2 class='card-title'>${selectedMovieResponse.original_title}</h2>
@@ -81,16 +83,26 @@ function renderMovie() {
             </li>
             <li class='card-item'>
               Genre
-              <p class='card-item-genres'>${selectedMovieResponse.genres
-                .map(genre => genre.name)
-                .slice(0, 3)
-                .join(', ')}
-                <span class='card-item-genre'></span>
+              <p class='card-item-genres'>${
+                selectedMovieResponse.genres
+                  .map(genre => genre.name)
+                  .slice(0, 3)
+                  .join(', ')
+                  ? selectedMovieResponse.genres
+                      .map(genre => genre.name)
+                      .slice(0, 3)
+                      .join(', ')
+                  : 'Genre is not defined'
+              }
               </p>
             </li>
           </ul>
           <p class='card-description'>About</p>
-          <p class='card-text'>${selectedMovieResponse.overview}</p>
+          <p class='card-text'>${
+            selectedMovieResponse.overview
+              ? selectedMovieResponse.overview
+              : 'Unfortunately, there is no description for this movie'
+          }</p>
           <div class='card-list-btn'>
             <button type='button' class='card-btn-watched' data-movieId=${
               selectedMovieResponse.id
