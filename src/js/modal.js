@@ -50,8 +50,8 @@ function renderMovie() {
   );
 
   const markup = `
-   <img class="modal-conteiner-img" src="https://image.tmdb.org/t/p/w500${
-     selectedMovieResponse.poster_path
+   <img class="modal-conteiner-img" src="${
+     selectedMovieResponse.poster_path ? `https://image.tmdb.org/t/p/w500${selectedMovieResponse.poster_path}` : 'https://d2j1wkp1bavyfs.cloudfront.net/legacy/assets/mf-no-poster-available-v2.png'
    }" alt="card">
   <div class='card-container'>
           <h2 class='card-title'>${selectedMovieResponse.original_title}</h2>
