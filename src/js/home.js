@@ -13,6 +13,7 @@ const allertMovie = document.querySelector('.allert');
 const errorImg = document.querySelector('.error_box');
 let genre;
 let currentPage = 1;
+let dataRender = '';
 swicher.addEventListener('change', themeChanger);
 GenreWriteLocalStorage();
 
@@ -45,16 +46,23 @@ export default function renderTrendMovies(currentPage) {
           genre_ids,
           vote_average,
           id,
+           src = poster_path === null
+          ? 'https://d2j1wkp1bavyfs.cloudfront.net/legacy/assets/mf-no-poster-available-v2.png'
+          : `https://image.tmdb.org/t/p/w500${poster_path}`,
+      
         }) => {
+          console.log(src)
+          console.log(poster_path)
           getGenreName(genre_ids);
+           dateRelise(release_date);
           return `<div class="movie-card" data-movieId=${id}>
-                 <img class="movie-img" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="card">
+                 <img class="movie-img" src="https://image.tmdb.org/t/p/w500${src}" alt="card">
             
                  <div class="movie-info">
                      <h2 class="movie-title">${original_title}</h2>
                     <h3 class="span-title">${genre.join(
                       ',  '
-                    )} | ${release_date.slice(0, 4)}</h3>
+                    )} | ${dataRender}</h3>
                      </div>
                  </div>`;
         }
@@ -67,10 +75,11 @@ export default function renderTrendMovies(currentPage) {
   });
 }
 
-let dataRender = '';
+
 //dateRelise(undefined)
+
 function dateRelise(relase) {
-  if (relase === undefined) {
+  if (relase === undefined || relase ==='') {
     dataRender = 'N/A';
   } else {
     dataRender = relase.slice(0, 4);
@@ -101,7 +110,7 @@ function getGenreName(genre_ids) {
     genre.splice(2, 3, 'Other');
   }
   if (genre.length === 0) {
-    genre.push('No genres');
+    genre.push('N/A');
   }
 }
 
@@ -140,6 +149,8 @@ function searchOurMovie(currentPage) {
     })
     .catch(error => error);
 }
+
+
 function renderSearchMovie(resp) {
   const newMarkup = resp.results
     .map(
