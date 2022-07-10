@@ -51,9 +51,7 @@ export default function renderTrendMovies(currentPage) {
           : `https://image.tmdb.org/t/p/w500${poster_path}`,
       
         }) => {
-          console.log(src)
-          console.log(poster_path)
-          getGenreName(genre_ids);
+           getGenreName(genre_ids);
            dateRelise(release_date);
           return `<div class="movie-card" data-movieId=${id}>
                  <img class="movie-img" src="https://image.tmdb.org/t/p/w500${src}" alt="card">
