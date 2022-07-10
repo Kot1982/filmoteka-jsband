@@ -1,9 +1,10 @@
-import jakeGif from '../images/error.jpg';
+import jakeGiff from '../images/image.png';
 export function renderMovies(root) {
   const movies = JSON.parse(localStorage.getItem('watchedMovies'));
 
   if (movies === null || root === null) {
-    return;
+    renderFillerWatch();
+      root.insertAdjacentHTML('afterbegin', fillerMarkup);
   } else {
     const listMurkup = movies
       .map(movie => {
@@ -28,18 +29,19 @@ export function renderMovies(root) {
       .join('');
 
     root.innerHTML = listMurkup;
-
-    if (listMurkup.length === 0) {
+     if (listMurkup.length === 0) {
       root.innerHTML = '';
       renderFillerWatch();
       root.insertAdjacentHTML('afterbegin', fillerMarkup);
     }
+
+  
   }
 }
 let fillerMarkup = '';
 function renderFillerWatch() {
   fillerMarkup = `
-  <img class="filler__img" src="${jakeGif}" alt="jake-the-doge">
+  <img class="filler__img" src="${jakeGiff}" alt="jake-the-doge">
     
   `;
 }
@@ -48,7 +50,8 @@ export function renderMoviesQueue(rootQueue) {
   const moviesQueue = JSON.parse(localStorage.getItem('queuedMovies'));
 
   if (moviesQueue === null || rootQueue === null) {
-    return;
+     renderFillerWatch();
+      rootQueue.insertAdjacentHTML('afterbegin', fillerMarkup);
   } else {
     const listMurkup = moviesQueue
       .map(movie => {
@@ -73,11 +76,12 @@ export function renderMoviesQueue(rootQueue) {
       .join('');
 
     rootQueue.innerHTML = listMurkup;
-    if (listMurkup.length === 0) {
+     if (listMurkup.length === 0) {
       rootQueue.innerHTML = '';
       renderFillerWatch();
       rootQueue.insertAdjacentHTML('afterbegin', fillerMarkup);
     }
+ 
   }
 }
 
