@@ -154,7 +154,11 @@ function onLocalStorageWatched(event) {
     watchedButton.innerText = buttonLabelWatchedRemove;
   }
   localStorage.setItem('watchedMovies', JSON.stringify(watchedMoviesArray));
-  renderMovies(root);
+  if (root === null) {
+    return;
+  } else {
+    renderMovies(root);
+  }
 }
 
 function onLocalStorageQue(event) {
@@ -173,5 +177,10 @@ function onLocalStorageQue(event) {
     queuedButton.innerText = buttonLabelQueueRemove;
   }
   localStorage.setItem('queuedMovies', JSON.stringify(queuedMoviesArray));
-  renderMoviesQueue(rootQueue);
+
+  if (rootQueue === null) {
+    return;
+  } else {
+    renderMoviesQueue(rootQueue);
+  }
 }
