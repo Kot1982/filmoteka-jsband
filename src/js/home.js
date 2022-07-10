@@ -54,7 +54,7 @@ export default function renderTrendMovies(currentPage) {
            getGenreName(genre_ids);
            dateRelise(release_date);
           return `<div class="movie-card" data-movieId=${id}>
-                 <img class="movie-img" src="https://image.tmdb.org/t/p/w500${src}" alt="card">
+                 <img class="movie-img" src="${src}" alt="card">
             
                  <div class="movie-info">
                      <h2 class="movie-title">${original_title}</h2>
