@@ -183,12 +183,12 @@ function renderSearchMovie(resp) {
   movies.innerHTML = newMarkup;
   if (resp.results.length === 0) {
     allertMovie.classList.remove('visually-hidden');
-    pagination.classList.add('visually-hidden');
-    errorImg.classList.remove('visually-hidden');
+   renderTrendMovies(currentPage);
+  
   } else {
     allertMovie.classList.add('visually-hidden');
-    pagination.classList.remove('visually-hidden');
-    errorImg.classList.add('visually-hidden');
+
+  
   }
 }
 
