@@ -1,4 +1,4 @@
-import jakeGiff from '../images/image.png';
+import jakeGiff from '../images/error_lib.png';
 export function renderMovies(root) {
   const movies = JSON.parse(localStorage.getItem('watchedMovies'));
 
