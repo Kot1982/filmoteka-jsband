@@ -94,21 +94,25 @@ function GenreWriteLocalStorage() {
 
 function getGenreName(genre_ids) {
   genre = [];
-  genre_ids.forEach(id => {
-    JSON.parse(localStorage.getItem('genresArray')).forEach(elem => {
-      if (id === elem.id) {
-        genre.push(elem.name);
-      }
+  if (genre_ids === null) {
+    return
+  } else {
+    genre_ids.forEach(id => {
+      JSON.parse(localStorage.getItem('genresArray')).forEach(elem => {
+        if (id === elem.id) {
+          genre.push(elem.name);
+        }
+      });
     });
-  });
-  if (genre.length === 2 || genre.length === 1) {
-    genre;
-  }
-  if (genre.length >= 3) {
-    genre.splice(2, 3, 'Other');
-  }
-  if (genre.length === 0) {
-    genre.push('N/A');
+    if (genre.length === 2 || genre.length === 1) {
+      genre;
+    }
+    if (genre.length >= 3) {
+      genre.splice(2, 3, 'Other');
+    }
+    if (genre.length === 0) {
+      genre.push('N/A');
+    }
   }
 }
 
