@@ -1,8 +1,7 @@
 import NewsApiServise from './/api-service';
 import { renderMovies, renderMoviesQueue } from './render-movies';
-//import   renderTrendMovies from './video'
 const newsApiServise = new NewsApiServise();
-//  let keyYouTube;
+
  let movieId;
  let selectedMovieResponse = null;
 let trailerBtnWatch;
@@ -26,33 +25,28 @@ closeBtn.addEventListener('click', onCloseModal);
 
 async function onMovieClick(event) {
   const movieCard = event.target.closest('.movie-card');
-  //console.log(movieCard)
-  // const movieId = movieCard.dataset.movieid;
   movieId = movieCard.dataset.movieid;
-  //console.log(movieId)
+  
   selectedMovieResponse = await newsApiServise.getMovieInfo(movieId);
-  //renderTrendMovies(movieId)
+  
  modalContainer.innerHTML = renderMovie();
  openModal();
 
 let keyYouTube;
   const watched = document.querySelector('.card-btn-watched');
- // console.log(watched)
+
   watched.addEventListener('click', onLocalStorageWatched);
 const que = document.querySelector('.card-btn-que');
   que.addEventListener('click', onLocalStorageQue);
-  //renderTrendMovies(movieId)
+  
   trailerBtnWatch = document.querySelector('.card-btn-youtub');
-//  console.log('btn',trailerBtnWatch)
-//  console.log('id', movieId)
-//  console.log('key', keyYouTube)
   function trailer() {
     newsApiServise.getVideoTreiler(movieId).then(res => {
       res.results.find(el => {
-       // console.log(el.name.includes('Official'))
+ 
         if (el.name.includes('Official')) {
           keyYouTube = el.key;
-          //console.log('12',el.name.includes('Official'))
+         
           window.open(`https://www.youtube.com/watch?v=${keyYouTube}`)
       
         } 
