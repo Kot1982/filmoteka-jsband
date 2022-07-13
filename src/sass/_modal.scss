@@ -278,6 +278,8 @@ br {
   line-height: 1.67;
   padding-bottom: 20px;
   color: #000000;
+  overflow-y: auto;
+  height: 100px;
 }
 
 .card-item-count {
@@ -290,6 +292,7 @@ br {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  margin-top: 20px;
   // flex-wrap: wrap;
 }
 
