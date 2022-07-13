@@ -16,7 +16,6 @@ const filter = document.querySelector('.filter-section');
 const genrePicker = document.querySelector('#genrepicker');
 const yearPicker = document.querySelector('#yearpicker');
 
-
 let genre;
 let currentPage = 1;
 let dataRender = '';
@@ -24,28 +23,22 @@ let dataRender = '';
 let yearValue = '';
 let genreValue = '';
 
-
 filterInput.forEach(item => {
-    item.addEventListener('change', e => {
-      yearValue = yearPicker.value;
-      genreValue = genrePicker.value;
-      createCard(genreValue, yearValue,currentPage);
-  
-    });
+  item.addEventListener('change', e => {
+    yearValue = yearPicker.value;
+    genreValue = genrePicker.value;
+    createCard(genreValue, yearValue, currentPage);
   });
+});
 
-
-
-function createCard(genres, year,currentPage) {
+function createCard(genres, year, currentPage) {
   mainInput.value = '';
-   allertMovie.classList.add('visually-hidden');
-   spinner.classList.remove('visually-hidden');
-  newsApiServise.fetchMovies(genres, year)
-    .then(res => {
-    console.log(res)
-      newsApiServise.resetPage();
-      renderSearchMovie(res);
-     const totalResult = res.total_results;
+  allertMovie.classList.add('visually-hidden');
+  spinner.classList.remove('visually-hidden');
+  newsApiServise.fetchMovies(genres, year).then(res => {
+    newsApiServise.resetPage();
+    renderSearchMovie(res);
+    const totalResult = res.total_results;
     currentPage = res.page;
 
     const instance = handlerPagination();
@@ -57,17 +50,26 @@ function createCard(genres, year,currentPage) {
     instance.on('afterMove', event => {
       newsApiServise.page = event.page;
       currentPage = newsApiServise.page;
-      createCard(genres, year,currentPage);
+      createCard(genres, year, currentPage);
     });
-    
-    
-   setTimeout(() => {
+
+    setTimeout(() => {
       spinner.classList.add('visually-hidden');
-   }, 500);   
-  })
+    }, 500);
+  });
 }
+yearPickerMenu();
+function yearPickerMenu() {
+  let startYear = 1900;
+  let endYear = new Date().getFullYear();
+  let years = [];
 
-
+  yearPicker.insertAdjacentHTML('beforeend', '<option value="">Year</option>');
+  for (let i = endYear; i > startYear; i--) {
+    years.push(`<option value="${i}">${i}</option>`);
+  }
+  yearPicker.insertAdjacentHTML('beforeend', years);
+}
 
 swicher.addEventListener('change', themeChanger);
 GenreWriteLocalStorage();
@@ -101,13 +103,12 @@ export default function renderTrendMovies(currentPage) {
           genre_ids,
           vote_average,
           id,
-           src = poster_path === null
-          ? 'https://d2j1wkp1bavyfs.cloudfront.net/legacy/assets/mf-no-poster-available-v2.png'
-          : `https://image.tmdb.org/t/p/w500${poster_path}`,
-      
+          src = poster_path === null
+            ? 'https://d2j1wkp1bavyfs.cloudfront.net/legacy/assets/mf-no-poster-available-v2.png'
+            : `https://image.tmdb.org/t/p/w500${poster_path}`,
         }) => {
-           getGenreName(genre_ids);
-           dateRelise(release_date);
+          getGenreName(genre_ids);
+          dateRelise(release_date);
           return `<div class="movie-card" data-movieId=${id}>
                  <img class="movie-img" src="${src}" alt="card">
             
@@ -128,11 +129,10 @@ export default function renderTrendMovies(currentPage) {
   });
 }
 
-
 //dateRelise(undefined)
 
 function dateRelise(relase) {
-  if (relase === undefined || relase ==='') {
+  if (relase === undefined || relase === '') {
     dataRender = 'N/A';
   } else {
     dataRender = relase.slice(0, 4);
@@ -150,7 +150,7 @@ function GenreWriteLocalStorage() {
 function getGenreName(genre_ids) {
   genre = [];
   if (genre_ids === null) {
-    return
+    return;
   } else {
     genre_ids.forEach(id => {
       JSON.parse(localStorage.getItem('genresArray')).forEach(elem => {
@@ -172,7 +172,6 @@ function getGenreName(genre_ids) {
 }
 
 function searchOurMovie(currentPage) {
-  
   const ourMovie = mainInput.value;
   if (ourMovie === '') {
     allertMovie.classList.add('visually-hidden');
@@ -180,7 +179,8 @@ function searchOurMovie(currentPage) {
   }
 
   spinner.classList.remove('visually-hidden');
-  newsApiServise.searchMovie(ourMovie)
+  newsApiServise
+    .searchMovie(ourMovie)
     .then(resp => {
       newsApiServise.resetPage();
       renderSearchMovie(resp);
@@ -204,7 +204,6 @@ function searchOurMovie(currentPage) {
     })
     .catch(error => error);
 }
-
 
 function renderSearchMovie(resp) {
   const newMarkup = resp.results
@@ -240,12 +239,9 @@ function renderSearchMovie(resp) {
   movies.innerHTML = newMarkup;
   if (resp.results.length === 0) {
     allertMovie.classList.remove('visually-hidden');
-   renderTrendMovies(currentPage);
-  
+    renderTrendMovies(currentPage);
   } else {
     allertMovie.classList.add('visually-hidden');
-
-  
   }
 }
 
@@ -255,6 +251,6 @@ mainInput.addEventListener('input', debounce(searchOurMovie, 600));
 //   newsApiServise.fetchMovies(genre, year).then(res => {
 //     console.log(res)
 //   })
-  
-// }  
+
+// }
 //  chooseGenre('28', '2022')
