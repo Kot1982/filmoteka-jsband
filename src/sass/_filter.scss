@@ -1,0 +1,29 @@
+.filter-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    padding-bottom: 0;
+}
+.filter-input {
+    border: 2px solid white;
+    border-radius: 5px;
+    background-color: transparent;
+    color: white;
+    text-transform: uppercase;
+
+    &:hover {
+        border: 2px solid red;
+        background: transparent;
+        color: white;
+    }
+}
+
+.filter-input:not(:last-child){
+    margin-right: 10px;
+}
+.filter-text {
+    margin-right: 20px;
+    font-family: 'Roboto';
+    color: #ff001b;
+}

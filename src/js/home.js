@@ -11,9 +11,94 @@ const swicher = document.querySelector('.theme-switch__toggle');
 const mainInput = document.querySelector('.header-input');
 const allertMovie = document.querySelector('.allert');
 const errorImg = document.querySelector('.error_box');
+const filterInput = document.querySelectorAll('.filter-input');
+const filter = document.querySelector('.filter-section');
+const genrePicker = document.querySelector('#genrepicker');
+const yearPicker = document.querySelector('#yearpicker');
+
+
 let genre;
 let currentPage = 1;
 let dataRender = '';
+
+let yearValue = '';
+let genreValue = '';
+
+
+filterInput.forEach(item => {
+  item.addEventListener('change', event => {
+    yearValue = yearPicker.value;
+    genreValue = genrePicker.value;
+    console.log('v',  yearValue);
+    console.log('vd', genrePicker);
+    createCard(genreValue, yearValue);
+  });
+});
+
+
+function createCard(genres, year) {
+  mainInput.value = '';
+   allertMovie.classList.add('visually-hidden');
+   spinner.classList.remove('visually-hidden');
+  newsApiServise.fetchMovies(genres, year).then(res => {
+    console.log(res)
+     newsApiServise.resetPage();
+     const totalResult = res.total_results;
+    currentPage = res.page;
+
+    const instance = handlerPagination();
+    instance.setItemsPerPage(20);
+    instance.setTotalItems(totalResult);
+
+    instance.movePageTo(currentPage);
+
+    instance.on('afterMove', event => {
+      newsApiServise.page = event.page;
+      currentPage = newsApiServise.page;
+      //createCard(currentPage);
+    });
+    
+     const markup = res
+   .map(
+        ({
+          poster_path,
+          original_title,
+          release_date,
+          genre_ids,
+          vote_average,
+          id,
+           src = poster_path === null
+          ? 'https://d2j1wkp1bavyfs.cloudfront.net/legacy/assets/mf-no-poster-available-v2.png'
+          : `https://image.tmdb.org/t/p/w500${poster_path}`,
+      
+     }) => {
+       getGenreName(genre_ids);
+           dateRelise(release_date);
+          return `<div class="movie-card" data-movieId=${id}>
+                 <img class="movie-img" src="${src}" alt="card">
+            
+                 <div class="movie-info">
+                     <h2 class="movie-title">${original_title}</h2>
+                    <h3 class="span-title">${genre.join(
+                      ',  '
+                    )} | ${dataRender}</h3>
+                     </div>
+                 </div>`;
+        }
+      )
+      .join('');
+    movies.innerHTML = markup;
+   setTimeout(() => {
+      spinner.classList.add('visually-hidden');
+   }, 500);
+   
+    
+    
+  })
+}
+
+
+//===============================================
 swicher.addEventListener('change', themeChanger);
 GenreWriteLocalStorage();
 
@@ -117,9 +202,10 @@ function getGenreName(genre_ids) {
 }
 
 function searchOurMovie(currentPage) {
+  
   const ourMovie = mainInput.value;
   if (ourMovie === '') {
-    errorImg.classList.add('visually-hidden');
+    //errorImg.classList.add('visually-hidden');
     allertMovie.classList.add('visually-hidden');
     pagination.classList.remove('visually-hidden');
     return renderTrendMovies(currentPage);
@@ -197,3 +283,11 @@ function renderSearchMovie(resp) {
 }
 
 mainInput.addEventListener('input', debounce(searchOurMovie, 600));
+
+// function chooseGenre(genre, year) {
+//   newsApiServise.fetchMovies(genre, year).then(res => {
+//     console.log(res)
+//   })
+  
+// }  
+//  chooseGenre('28', '2022')

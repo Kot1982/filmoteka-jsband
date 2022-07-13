@@ -28,6 +28,17 @@ export default class NewsApiServise {
     });
   }
 
+   fetchMovies(genre, year) {
+     return Axios.get(
+       `${url}discover/movie?with_genres=${genre}&primary_release_year=${year}&sort_by=popularity.desc&api_key=${key}&page=${this.page}`
+   )
+     .then(response => {
+       
+       return response.data.results
+      })
+     
+  }
+
   async getSearchMovie() {
     return await Axios.get(
       `${url}search/movie?api_key=${key}&query=${this.searchQuery}&page=${this.page}&include_adult=false`
