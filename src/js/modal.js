@@ -40,25 +40,45 @@ const que = document.querySelector('.card-btn-que');
   que.addEventListener('click', onLocalStorageQue);
   
   trailerBtnWatch = document.querySelector('.card-btn-youtub');
+
+
   function trailer() {
+      const modalTrailer = document.querySelector('.js-trailer');
+    modalTrailer.classList.remove('is-hidden');
+    
+   modalTrailer.addEventListener('click', function onBackdropClick(event) {
+       if (event.currentTarget === event.target) {
+    modalTrailer.classList.add('is-hidden');
+  }
+   });
+
     newsApiServise.getVideoTreiler(movieId).then(res => {
       res.results.find(el => {
  
         if (el.name.includes('Official')) {
           keyYouTube = el.key;
-         
-          window.open(`https://www.youtube.com/watch?v=${keyYouTube}`)
-      
+          const markup = `
+  <iframe class="iframe" width="854" height="480" src="https://www.youtube.com/embed/${keyYouTube}"
+    title="YouTube video player" frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>`;
+        
+          modalTrailer.innerHTML = markup;
+        
         } 
       })
 
     })
+ 
+
   }
   
   trailerBtnWatch.addEventListener('click', trailer)
 
-}
+    
 
+}
 
 function renderMovie() {
   const queuedMovies = localStorage.getItem('queuedMovies');

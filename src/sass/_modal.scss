@@ -371,3 +371,14 @@ br {
 .modal {
   position: relative;
 }
+
+.modal-trailer{
+  display: flex;
+  justify-content: center;
+  padding: 30px
+}
+
+.iframe{
+  height: 620px;
+  padding-bottom: 20px;
+}
