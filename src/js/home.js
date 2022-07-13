@@ -26,23 +26,25 @@ let genreValue = '';
 
 
 filterInput.forEach(item => {
-  item.addEventListener('change', event => {
-    yearValue = yearPicker.value;
-    genreValue = genrePicker.value;
-    console.log('v',  yearValue);
-    console.log('vd', genrePicker);
-    createCard(genreValue, yearValue);
+    item.addEventListener('change', e => {
+      yearValue = yearPicker.value;
+      genreValue = genrePicker.value;
+      createCard(genreValue, yearValue,currentPage);
+  
+    });
   });
-});
 
 
-function createCard(genres, year) {
+
+function createCard(genres, year,currentPage) {
   mainInput.value = '';
    allertMovie.classList.add('visually-hidden');
    spinner.classList.remove('visually-hidden');
-  newsApiServise.fetchMovies(genres, year).then(res => {
+  newsApiServise.fetchMovies(genres, year)
+    .then(res => {
     console.log(res)
-     newsApiServise.resetPage();
+      newsApiServise.resetPage();
+      renderSearchMovie(res);
      const totalResult = res.total_results;
     currentPage = res.page;
 
@@ -55,45 +57,13 @@ function createCard(genres, year) {
     instance.on('afterMove', event => {
       newsApiServise.page = event.page;
       currentPage = newsApiServise.page;
-      //createCard(currentPage);
+      createCard(genres, year,currentPage);
     });
     
-     const markup = res
-   .map(
-        ({
-          poster_path,
-          original_title,
-          release_date,
-          genre_ids,
-          vote_average,
-          id,
-           src = poster_path === null
-          ? 'https://d2j1wkp1bavyfs.cloudfront.net/legacy/assets/mf-no-poster-available-v2.png'
-          : `https://image.tmdb.org/t/p/w500${poster_path}`,
-      
-     }) => {
-       getGenreName(genre_ids);
-           dateRelise(release_date);
-          return `<div class="movie-card" data-movieId=${id}>
-                 <img class="movie-img" src="${src}" alt="card">
-            
-                 <div class="movie-info">
-                     <h2 class="movie-title">${original_title}</h2>
-                    <h3 class="span-title">${genre.join(
-                      ',  '
-                    )} | ${dataRender}</h3>
-                     </div>
-                 </div>`;
-        }
-      )
-      .join('');
-    movies.innerHTML = markup;
+    
    setTimeout(() => {
       spinner.classList.add('visually-hidden');
-   }, 500);
-   
-    
-    
+   }, 500);   
   })
 }
 
@@ -210,8 +180,7 @@ function searchOurMovie(currentPage) {
   }
 
   spinner.classList.remove('visually-hidden');
-  newsApiServise
-    .searchMovie(ourMovie)
+  newsApiServise.searchMovie(ourMovie)
     .then(resp => {
       newsApiServise.resetPage();
       renderSearchMovie(resp);

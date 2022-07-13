@@ -34,7 +34,7 @@ export default class NewsApiServise {
    )
      .then(response => {
        
-       return response.data.results
+       return response.data
       })
      
   }
