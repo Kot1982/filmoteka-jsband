@@ -1,5 +1,6 @@
 import NewsApiServise from './/api-service';
 import { renderMovies, renderMoviesQueue } from './render-movies';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 const newsApiServise = new NewsApiServise();
 
  let movieId;
@@ -29,33 +30,37 @@ async function onMovieClick(event) {
   
   selectedMovieResponse = await newsApiServise.getMovieInfo(movieId);
   
- modalContainer.innerHTML = renderMovie();
- openModal();
+  modalContainer.innerHTML = renderMovie();
+  openModal();
 
-let keyYouTube;
+  let keyYouTube;
   const watched = document.querySelector('.card-btn-watched');
 
   watched.addEventListener('click', onLocalStorageWatched);
-const que = document.querySelector('.card-btn-que');
+  const que = document.querySelector('.card-btn-que');
   que.addEventListener('click', onLocalStorageQue);
   
   trailerBtnWatch = document.querySelector('.card-btn-youtub');
 
-
+  trailerBtnWatch.addEventListener('click', trailer)
+  
+  
   function trailer() {
-      const modalTrailer = document.querySelector('.js-trailer');
+    const modalTrailer = document.querySelector('.js-trailer');
     modalTrailer.classList.remove('is-hidden');
     
-   modalTrailer.addEventListener('click', function onBackdropClick(event) {
-       if (event.currentTarget === event.target) {
-    modalTrailer.classList.add('is-hidden');
-  }
-   });
-
+    modalTrailer.addEventListener('click', function onBackdropClick(event) {
+      if (event.currentTarget === event.target) {
+        modalTrailer.classList.add('is-hidden');
+      }
+    });
+    
     newsApiServise.getVideoTreiler(movieId).then(res => {
-      res.results.find(el => {
- 
-        if (el.name.includes('Official')) {
+     
+      if (res.results.length !== 0) {
+        res.results.find(el => {
+    
+        if (el.name.includes('Official') || el.key!=='') {
           keyYouTube = el.key;
           const markup = `
   <iframe class="iframe" width="854" height="480" src="https://www.youtube.com/embed/${keyYouTube}"
@@ -67,17 +72,19 @@ const que = document.querySelector('.card-btn-que');
           modalTrailer.innerHTML = markup;
         
         } 
+         
       })
+        
+      } else {
+        modalTrailer.innerHTML = '';
+        Notify.failure('Sorry we did not find trailer');
 
-    })
- 
-
-  }
+        return
+    }
+      })
+ }
   
-  trailerBtnWatch.addEventListener('click', trailer)
-
-    
-
+  // trailerBtnWatch.addEventListener('click', trailer)
 }
 
 function renderMovie() {
