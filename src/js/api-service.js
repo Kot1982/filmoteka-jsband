@@ -53,15 +53,13 @@ export default class NewsApiServise {
     });
   }
 
-  // async getAllGenres() {
-  //   return await Axios.get(
-  //     `${url}genre/movie/list?api_key=${key}&language=en-US`
-  //   ).then(response => {
-  //     console.log(response.data);
-  //     this.allGenres.push(...response.data.genres);
-  //     console.log(this.allGenres);
-  //   });
-  // }
+  async getVideoTreiler(movie_id) {
+    return await Axios.get(
+      `${url}movie/${movie_id}/videos?api_key=${key}&language=en-US`
+    ).then(response => {
+      return response.data;
+      });
+  }
 
   incrementPage() {
     this.page += 1;

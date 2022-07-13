@@ -1,10 +1,11 @@
 import NewsApiServise from './/api-service';
 import { renderMovies, renderMoviesQueue } from './render-movies';
-
+//import   renderTrendMovies from './video'
 const newsApiServise = new NewsApiServise();
-
-let selectedMovieResponse = null;
-
+//  let keyYouTube;
+ let movieId;
+ let selectedMovieResponse = null;
+let trailerBtnWatch;
 const moviesContainer = document.querySelector('.movies-home');
 const modalContainer = document.querySelector('.modal-conteiner');
 export const backdrop = document.querySelector('.backdrop-movie');
@@ -21,20 +22,49 @@ if (moviesContainer) {
 }
 closeBtn.addEventListener('click', onCloseModal);
 
+
+
 async function onMovieClick(event) {
   const movieCard = event.target.closest('.movie-card');
-  const movieId = movieCard.dataset.movieid;
-
+  //console.log(movieCard)
+  // const movieId = movieCard.dataset.movieid;
+  movieId = movieCard.dataset.movieid;
+  //console.log(movieId)
   selectedMovieResponse = await newsApiServise.getMovieInfo(movieId);
+  //renderTrendMovies(movieId)
+ modalContainer.innerHTML = renderMovie();
+ openModal();
 
-  modalContainer.innerHTML = renderMovie();
-
-  openModal();
+let keyYouTube;
   const watched = document.querySelector('.card-btn-watched');
+ // console.log(watched)
   watched.addEventListener('click', onLocalStorageWatched);
-  const que = document.querySelector('.card-btn-que');
+const que = document.querySelector('.card-btn-que');
   que.addEventListener('click', onLocalStorageQue);
+  //renderTrendMovies(movieId)
+  trailerBtnWatch = document.querySelector('.card-btn-youtub');
+//  console.log('btn',trailerBtnWatch)
+//  console.log('id', movieId)
+//  console.log('key', keyYouTube)
+  function trailer() {
+    newsApiServise.getVideoTreiler(movieId).then(res => {
+      res.results.find(el => {
+       // console.log(el.name.includes('Official'))
+        if (el.name.includes('Official')) {
+          keyYouTube = el.key;
+          //console.log('12',el.name.includes('Official'))
+          window.open(`https://www.youtube.com/watch?v=${keyYouTube}`)
+      
+        } 
+      })
+
+    })
+  }
+  
+  trailerBtnWatch.addEventListener('click', trailer)
+
 }
+
 
 function renderMovie() {
   const queuedMovies = localStorage.getItem('queuedMovies');
@@ -42,8 +72,7 @@ function renderMovie() {
   const isMovieQueued = queuedMoviesArray.some(
     movie => movie.id === selectedMovieResponse.id
   );
-
-  const watchedMovies = localStorage.getItem('watchedMovies');
+const watchedMovies = localStorage.getItem('watchedMovies');
   const watchedMoviesArray = JSON.parse(watchedMovies) || [];
   const isMovieWatched = watchedMoviesArray.some(
     movie => movie.id === selectedMovieResponse.id
@@ -111,7 +140,8 @@ function renderMovie() {
   }</button>
             <button type='button' class='card-btn-que' data-movieId=${
               selectedMovieResponse.id
-            }>${isMovieQueued ? 'remove from queue' : 'add to queue'}</button>
+    }>${isMovieQueued ? 'remove from queue' : 'add to queue'}</button>
+            <button type='button' class='card-btn-youtub'>Watch Trailer</button>
           </div>
         </div>
       </div>
@@ -184,3 +214,4 @@ function onLocalStorageQue(event) {
     renderMoviesQueue(rootQueue);
   }
 }
+//console.log('movieId', movieId)

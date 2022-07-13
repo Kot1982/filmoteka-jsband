@@ -294,7 +294,8 @@ br {
 }
 
 .card-btn-watched,
-.card-btn-que {
+.card-btn-que,
+.card-btn-youtub {
   font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -329,7 +330,8 @@ br {
 }
 
 .card-btn-watched:hover,
-.card-btn-que:hover {
+.card-btn-que:hover,
+.card-btn-youtub:hover {
   color: #ffffff;
   background-color: #ff6b01;
   border: none;
