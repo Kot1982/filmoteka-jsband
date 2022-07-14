@@ -48,6 +48,7 @@ async function onMovieClick(event) {
     modalTrailer.addEventListener('click', function onBackdropClick(event) {
       if (event.currentTarget === event.target) {
         modalTrailer.classList.add('is-hidden');
+        modalTrailer.innerHTML = '';
       }
     });
 
